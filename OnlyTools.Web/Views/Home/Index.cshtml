@@ -2,7 +2,88 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="container">
+        <h1 class="welcome-title, text-center">Welcome to Only Tools!</h1>
+        <p class="welcome-text">Are you ready to transform your home with ease? Discover expert renovation tips and borrow the tools you need from your neighbors. Whether you're planning a DIY project or seeking professional advice, you've come to the right place.</p>
+        <div class="why-join">
+            <h2>Why join us?</h2>
+            <ul>
+                <li><strong>Access a wealth of renovation tips:</strong> Learn from seasoned renovators and DIY enthusiasts. From beginner guides to advanced techniques, our community has you covered.</li>
+                <li><strong>Share and borrow tools:</strong> No need to invest in expensive tools for a one-time project. Borrow from your neighbors and lend a helping hand to fellow renovators.</li>
+                <li><strong>Connect with like-minded individuals:</strong> Join a vibrant community of homeowners, contractors, and hobbyists. Share ideas, ask questions, and get inspired.</li>
+            </ul>
+        </div>
+        <h4 class="ready-to-join">Ready to embark on your renovation journey?</h4>
+    </div>
+}
+
+
+@* @{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="container">
+        <h1 class="welcome-title text-center">Welcome to Only Tools!</h1>
+        <p class="welcome-text">Are you ready to transform your home with ease? Discover expert renovation tips and borrow the tools you need from your neighbors. Whether you're planning a DIY project or seeking professional advice, you've come to the right place.</p>
+        <div class="why-join">
+            <h2>Why join us?</h2>
+            <ul>
+                <li><strong>Access a wealth of renovation tips:</strong> Learn from seasoned renovators and DIY enthusiasts. From beginner guides to advanced techniques, our community has you covered.</li>
+                <li><strong>Share and borrow tools:</strong> No need to invest in expensive tools for a one-time project. Borrow from your neighbors and lend a helping hand to fellow renovators.</li>
+                <li><strong>Connect with like-minded individuals:</strong> Join a vibrant community of homeowners, contractors, and hobbyists. Share ideas, ask questions, and get inspired.</li>
+            </ul>
+        </div>
+        <h4 class="ready-to-join">Ready to embark on your renovation journey?</h4>
+    </div>
+}
+else
+{
+    <div class="container">
+        <h2 class="mt-5">Your Tools</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tool Name</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tool in Model.Tools) // Assuming 'Model.Tools' exists and contains the tools data
+                {
+                    <tr>
+                        <td>@tool.Name</td>
+                        <td>@tool.Category</td>
+                        <td>@tool.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h2 class="mt-5">Tips for You</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tip Title</th>
+                    <th>Description</th>
+                    <th>Contributor</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tip in Model.Tips) // Assuming 'Model.Tips' exists and contains the tips data
+                {
+                    <tr>
+                        <td>@tip.Title</td>
+                        <td>@tip.Description</td>
+                        <td>@tip.Contributor</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+} *@
+

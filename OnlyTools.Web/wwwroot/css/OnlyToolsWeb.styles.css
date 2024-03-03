@@ -1,0 +1,98 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html, body {
+    height: 100%;
+}
+html {
+    position: relative;
+}
+
+body {
+    margin-bottom: 60px;
+}
+/* Global styles */
+body {
+    background: linear-gradient(to bottom, #618685, #36486b); /* Base background gradient */
+    min-height: 100vh;
+}
+
+/* Navbar styles */
+.custom-navbar {
+    background: linear-gradient(to bottom, #618685, #36486b);
+    color: #fff; /* Light text */
+}
+
+.navbar-brand img.logo-img {
+    max-height: 40px; /* Adjust the logo image height */
+}
+
+.navbar-nav .nav-link {
+    color: #000000; /* Navbar link color */
+    font-weight: bold;
+}
+
+    .navbar-nav .nav-link:hover {
+        color: #007bff; /* Navbar link hover color */
+    }
+
+/* Dropdown menu styles */
+.dropdown-menu {
+    background: linear-gradient(to bottom, #618685, #36486b); /* Dropdown menu background gradient */
+}
+
+.dropdown-item {
+    color: #ffffff; /* Dropdown item color */
+}
+
+    .dropdown-item:hover {
+        background-color: #007bff; /* Dropdown item hover background color */
+        color: #ffffff; /* Dropdown item hover text color */
+    }
+
+/* Font styles */
+.welcome-title {
+    font-family: Arial, sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.welcome-text {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.why-join h2 {
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.why-join ul {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.ready-to-join h4 {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}

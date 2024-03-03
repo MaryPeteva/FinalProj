@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ToolModel>
+
+@{
+    ViewBag.Title = "What do you need for you next project?";
+}
+<h2>Available Tools</h2>
+
+<div class="row">
+    @foreach (var tool in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="@Url.Action("GetImage", "Tool", new { id = tool.Id })" class="card-img-top" alt="Tool Image">
+                <div class="card-body">
+                    <h5 class="card-title">@tool.Name</h5>
+                    <p class="card-text">@tool.Description</p>
+                    <a href="@Url.Action("Details", "Tool", new { id = tool.Id })" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

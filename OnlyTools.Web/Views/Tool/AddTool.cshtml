@@ -1,0 +1,33 @@
+﻿@model ToolModel
+
+@{
+    ViewBag.Title = "Share a tool";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr/>
+<div class="row">
+    <form method="post">
+        <div class="form-group">
+            <div class="mb-3">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Enter tool name">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control" placeholder="Enter tool description">
+                <span asp-validation-for="Description" class="small text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="RentPrice"></label>
+                <input asp-for="RentPrice" class="form-control" placeholder="Enter tool rent price">
+                <span asp-validation-for="RentPrice" class="small text-danger"></span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Add Tool</button>
+        </div>
+
+    </form>
+</div>
