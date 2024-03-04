@@ -1,0 +1,15 @@
+C:\Users\User\source\repos\FinalProj\OnlyTools.Infrastructure\bin\Debug\net6.0\OnlyTools.Infrastructure.deps.json
+C:\Users\User\source\repos\FinalProj\OnlyTools.Infrastructure\bin\Debug\net6.0\OnlyTools.Infrastructure.runtimeconfig.json
+C:\Users\User\source\repos\FinalProj\OnlyTools.Infrastructure\bin\Debug\net6.0\OnlyTools.Infrastructure.dll
+C:\Users\User\source\repos\FinalProj\OnlyTools.Infrastructure\bin\Debug\net6.0\OnlyTools.Infrastructure.pdb
+C:\Users\User\source\repos\FinalProj\OnlyTools.Infrastructure\obj\Debug\net6.0\OnlyTools.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\FinalProj\OnlyTools.Infrastructure\obj\Debug\net6.0\OnlyTools.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\source\repos\FinalProj\OnlyTools.Infrastructure\obj\Debug\net6.0\OnlyTools.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\User\source\repos\FinalProj\OnlyTools.Infrastructure\obj\Debug\net6.0\OnlyTools.Infrastructure.AssemblyInfo.cs
+C:\Users\User\source\repos\FinalProj\OnlyTools.Infrastructure\obj\Debug\net6.0\OnlyTools.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\FinalProj\OnlyTools.Infrastructure\obj\Debug\net6.0\OnlyTools.Infrastructure.sourcelink.json
+C:\Users\User\source\repos\FinalProj\OnlyTools.Infrastructure\obj\Debug\net6.0\OnlyTools.Infrastructure.dll
+C:\Users\User\source\repos\FinalProj\OnlyTools.Infrastructure\obj\Debug\net6.0\refint\OnlyTools.Infrastructure.dll
+C:\Users\User\source\repos\FinalProj\OnlyTools.Infrastructure\obj\Debug\net6.0\OnlyTools.Infrastructure.pdb
+C:\Users\User\source\repos\FinalProj\OnlyTools.Infrastructure\obj\Debug\net6.0\OnlyTools.Infrastructure.genruntimeconfig.cache
+C:\Users\User\source\repos\FinalProj\OnlyTools.Infrastructure\obj\Debug\net6.0\ref\OnlyTools.Infrastructure.dll

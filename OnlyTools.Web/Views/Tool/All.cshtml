@@ -1,22 +1,30 @@
-﻿@model IEnumerable<ToolModel>
-
+﻿@model List<ToolModel>
 @{
     ViewBag.Title = "What do you need for you next project?";
 }
-<h2>Available Tools</h2>
 
-<div class="row">
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
     @foreach (var tool in Model)
     {
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <img src="@Url.Action("GetImage", "Tool", new { id = tool.Id })" class="card-img-top" alt="Tool Image">
-                <div class="card-body">
-                    <h5 class="card-title">@tool.Name</h5>
-                    <p class="card-text">@tool.Description</p>
-                    <a href="@Url.Action("Details", "Tool", new { id = tool.Id })" class="btn btn-primary">Details</a>
-                </div>
+        <div class="card col-4" style="width: 20rem; ">
+            <div class="card-body">
+                <h5 class="card-title mt-1">@tool.Name</h5>
+                <p class="mb-0"><span class="fw-bold">Name: </span>@tool.Name</p>
+                <p class="mb-0"><span class="fw-bold">Rent price: </span>@tool.RentPrice</p>
             </div>
+
+            <a asp-controller="Tool" asp-action="Details" asp-route-id="@tool.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">View Details</a>
+            @if (User.Identity.IsAuthenticated && tool.OwnerID == User.FindFirstValue(ClaimTypes.NameIdentifier))
+            {
+                <a asp-controller="Tool" asp-action="Edit" asp-route-id="@tool.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+            }
         </div>
     }
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,10 +1,13 @@
-﻿using OnlyTools.Core.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using OnlyTools.Core.Models;
 
 namespace OnlyTools.Core.Contracts
 {
     public interface IToolServices
     {
-        Task AddNewToolAsync(ToolModel tool, string userId);
+        Task AddNewToolAsync(ToolUploadModel tool, string userId);
         Task<IEnumerable<ToolModel>> GetAllToolsAsync();
+        Task<ToolDetailsModel> GetToolDetails(int id);
+        Task UpdateToolAsync(int id, ToolUploadModel tool);
     }
 }

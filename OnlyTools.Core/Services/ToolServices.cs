@@ -14,7 +14,7 @@ namespace OnlyTools.Core.Services
             context = _context;
         }
 
-        public async Task AddNewToolAsync(ToolModel tool, string userId)
+        public async Task AddNewToolAsync(ToolUploadModel tool, string userId)
         {
             var newTool = new Tool() 
             {
@@ -24,8 +24,35 @@ namespace OnlyTools.Core.Services
                 OwnerID = userId,
             };
 
-            await context.Tools.AddAsync(newTool);
-            await context.SaveChangesAsync();
+            if (tool.ToolPicture != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    try
+                    {
+                        await tool.ToolPicture.CopyToAsync(memoryStream);
+                        newTool.ToolPicture = memoryStream.ToArray();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle the exception (e.g., log it, return an error response)
+                        await Console.Out.WriteLineAsync($"Error uploading picture: {ex.Message}");
+                         // Rethrow the exception to indicate failure
+                    }
+                }
+            }
+
+            try
+            {
+                await context.Tools.AddAsync(newTool);
+                await context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                // Handle database-related exceptions (e.g., constraint violations)
+                await Console.Out.WriteLineAsync($"Error saving tool to database: {ex.Message}");
+                throw; // Rethrow the exception to indicate failure
+            }
         }
 
         public async Task<IEnumerable<ToolModel>> GetAllToolsAsync() 
@@ -33,17 +60,61 @@ namespace OnlyTools.Core.Services
             return await context.Tools
                 .Select(t => new ToolModel() 
                 {
+                    Id = t.Id,
                     Name = t.Name,
-                    Description = t.Description,
-                    IsRented = t.IsRented,
-                    //Owner = t.Owner,
+                    OwnerID = t.OwnerID,
                     RentPrice = t.RentPrice,
                     ToolPicture = t.ToolPicture
                 })
-                .Where(t=>t.IsRented == false)
                 .AsNoTracking()
                 .ToListAsync();
         }
 
+        public async Task<ToolDetailsModel> GetToolDetails(int id)
+        {
+            Tool tool = await context.Tools.FindAsync(id);
+
+            if (tool == null)
+            {
+                return null;
+            }
+
+            var toolDetails = new ToolDetailsModel
+            {
+                Id = tool.Id,
+                Name = tool.Name,
+                Description = tool.Description,
+                OwnerID = tool.OwnerID,
+                IsRented = tool.IsRented,
+                RentPrice = tool.RentPrice,
+                ToolPicture = tool.ToolPicture
+            };
+
+            return toolDetails;
+        }
+
+        public async Task UpdateToolAsync(int id, ToolUploadModel tool)
+        {
+            Tool t = await context.Tools.FindAsync(id);
+            t.Name = tool.Name;
+            t.Description = tool.Description;
+            t.RentPrice = tool.RentPrice;
+            using (var memoryStream = new MemoryStream())
+            {
+                try
+                {
+                    await tool.ToolPicture.CopyToAsync(memoryStream);
+                    t.ToolPicture = memoryStream.ToArray();
+                }
+                catch (Exception ex)
+                {
+                    // Handle the exception (e.g., log it, return an error response)
+                    await Console.Out.WriteLineAsync($"Error uploading picture: {ex.Message}");
+                    // Rethrow the exception to indicate failure
+                }
+            }
+
+            await context.SaveChangesAsync();
+        }
     }
 }

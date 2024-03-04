@@ -21,27 +21,54 @@ namespace OnlyTools.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddTool() 
+        public IActionResult AddTool()
         {
-            var tool = new ToolModel();
+            var tool = new ToolUploadModel();
             return View(tool);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddTool(ToolModel tool) 
+        public async Task<IActionResult> AddTool(ToolUploadModel tool) 
         {
             string userId = GetUserId();
             tool.OwnerID = userId;
-            //tool.Owner = new ToolOwner() 
-            //{
-            //    Id = userId,
-            //    Email = User.Identity.Name,
-            //};
-            //if (!ModelState.IsValid) 
-            //{
-            //    return View(tool);
-            //}
             await _services.AddNewToolAsync(tool, userId);
+            return RedirectToAction(nameof(All));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            ToolDetailsModel toolDetails = await _services.GetToolDetails(id);
+            if (toolDetails == null)
+            {
+                return NotFound();
+            }
+            return View(toolDetails);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var tool = await _services.GetToolDetails(id);
+            if (tool == null)
+            {
+                return NotFound();
+            }
+            var toolM = new ToolUploadModel
+            {
+                Name = tool.Name,
+                Description = tool.Description,
+                RentPrice = tool.RentPrice,
+            };
+            //add the picture once it starts working
+            return View(toolM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, ToolUploadModel tool)
+        {
+            await _services.UpdateToolAsync(id, tool);
             return RedirectToAction(nameof(All));
         }
 
