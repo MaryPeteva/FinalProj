@@ -23,7 +23,6 @@ namespace OnlyTools.Core.Models
 
         [Required]
         public bool IsRented { get; set; }
-
         public IFormFile? ToolPicture { get; set; }
 
         [Required]

@@ -30,8 +30,10 @@ namespace OnlyTools.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AddTool(ToolUploadModel tool) 
         {
+            await Console.Out.WriteLineAsync("I am in add tool!!");
             string userId = GetUserId();
             tool.OwnerID = userId;
+            //TODO remove user id from AddNewToolAsync
             await _services.AddNewToolAsync(tool, userId);
             return RedirectToAction(nameof(All));
         }
