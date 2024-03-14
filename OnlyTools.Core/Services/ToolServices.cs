@@ -14,14 +14,14 @@ namespace OnlyTools.Core.Services
             context = _context;
         }
 
-        public async Task AddNewToolAsync(ToolUploadModel tool, string userId)
+        public async Task AddNewToolAsync(ToolUploadModel tool)
         {
             var newTool = new Tool() 
             {
                 Name = tool.Name,
                 Description = tool.Description,
                 RentPrice = tool.RentPrice,
-                OwnerID = userId,
+                OwnerID = tool.OwnerID
             };
  
             if (tool.ToolPicture != null)
