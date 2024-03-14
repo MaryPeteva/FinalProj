@@ -12,12 +12,13 @@
             <dt class="col-sm-3">Description:</dt>
             <dd class="col-sm-9">@Model.Description</dd>
 
-            <dt class="col-sm-3">Rented:</dt>
-            <dd class="col-sm-9">@Model.IsRented</dd>
-
             <dt class="col-sm-3">Rent Price:</dt>
             <dd class="col-sm-9">@Model.RentPrice</dd>
         </dl>
+        @if (!Model.IsRented && Model.OwnerID != User.FindFirstValue(ClaimTypes.NameIdentifier))
+        {
+            <a asp-controller="Tool" asp-action="Rent" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Rent</a>
+        }
     </div>
     <div class="col-md-6">
         @if (Model.ToolPicture != null)
