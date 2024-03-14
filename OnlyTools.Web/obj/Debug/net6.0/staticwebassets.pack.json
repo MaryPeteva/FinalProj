@@ -33,12 +33,116 @@
       "PackagePath": "staticwebassets\\css\\Pictures\\smallLogoNoBG.png"
     },
     {
-      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\favicon.ico",
-      "PackagePath": "staticwebassets\\favicon.ico"
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\about-img.jpg",
+      "PackagePath": "staticwebassets\\images\\about-img.jpg"
     },
     {
-      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\js\\site.js",
-      "PackagePath": "staticwebassets\\js\\site.js"
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\client.png",
+      "PackagePath": "staticwebassets\\images\\client.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\facebook.png",
+      "PackagePath": "staticwebassets\\images\\facebook.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\google-plus.png",
+      "PackagePath": "staticwebassets\\images\\google-plus.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\left-arrow-black.png",
+      "PackagePath": "staticwebassets\\images\\left-arrow-black.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\left-arrow.png",
+      "PackagePath": "staticwebassets\\images\\left-arrow.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\linkedin.png",
+      "PackagePath": "staticwebassets\\images\\linkedin.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\location.png",
+      "PackagePath": "staticwebassets\\images\\location.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\menu.png",
+      "PackagePath": "staticwebassets\\images\\menu.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\next.png",
+      "PackagePath": "staticwebassets\\images\\next.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\prev.png",
+      "PackagePath": "staticwebassets\\images\\prev.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\right-arrow-black.png",
+      "PackagePath": "staticwebassets\\images\\right-arrow-black.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\right-arrow.png",
+      "PackagePath": "staticwebassets\\images\\right-arrow.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\s-1.jpg",
+      "PackagePath": "staticwebassets\\images\\s-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\s-2.jpg",
+      "PackagePath": "staticwebassets\\images\\s-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\s-3.jpg",
+      "PackagePath": "staticwebassets\\images\\s-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\s-4.jpg",
+      "PackagePath": "staticwebassets\\images\\s-4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\search-icon.png",
+      "PackagePath": "staticwebassets\\images\\search-icon.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\slider-img.jpg",
+      "PackagePath": "staticwebassets\\images\\slider-img.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\telephone.png",
+      "PackagePath": "staticwebassets\\images\\telephone.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\twitter.png",
+      "PackagePath": "staticwebassets\\images\\twitter.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\w-1.png",
+      "PackagePath": "staticwebassets\\images\\w-1.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\w-2.png",
+      "PackagePath": "staticwebassets\\images\\w-2.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\w-3.png",
+      "PackagePath": "staticwebassets\\images\\w-3.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\w-4.png",
+      "PackagePath": "staticwebassets\\images\\w-4.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\images\\worker.png",
+      "PackagePath": "staticwebassets\\images\\worker.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\js\\jquery-3.4.1.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery-3.4.1.min.js"
     },
     {
       "Id": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Web\\wwwroot\\lib\\bootstrap\\LICENSE",

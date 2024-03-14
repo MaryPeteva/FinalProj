@@ -26,7 +26,8 @@
             </div>
             <div class="form-group">
                 <label for="">Tool Image</label>
-                <input type="file" class="form-control" name="ToolImage" />
+                <input asp-for="ToolPicture" class="form-control" />
+                <span asp-validation-for="ToolPicture" class="text-danger"></span>
             </div>
         </div>
         <div class="mb-3">
