@@ -3,6 +3,13 @@
     ViewBag.Title = "What do you need for you next project?";
 }
 
+<style>
+    .card-img-top {
+        width: 200px; 
+        height: auto;
+    }
+</style>
+
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
@@ -10,6 +17,13 @@
     @foreach (var tool in Model)
     {
         <div class="card col-4" style="width: 20rem; ">
+            @if (tool.ToolPicture != null)
+            {
+
+                string imageBase64 = Convert.ToBase64String(tool.ToolPicture);
+                string imageSrc = $"data:image/jpeg;base64,{imageBase64}";
+                <img src="@imageSrc" class="card-img-top" alt="Tool Image">    
+            }
             <div class="card-body">
                 <h5 class="card-title mt-1">@tool.Name</h5>
                 <p class="mb-0"><span class="fw-bold">Name: </span>@tool.Name</p>
@@ -20,6 +34,11 @@
             @if (User.Identity.IsAuthenticated && tool.OwnerID == User.FindFirstValue(ClaimTypes.NameIdentifier))
             {
                 <a asp-controller="Tool" asp-action="Edit" asp-route-id="@tool.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+                <form class="mt-2" asp-controller="Tool" asp-action="Delete" asp-route-id="@tool.Id">
+                    <div class="d-grid gap-2">
+                        <input type="submit" value="Delete" class="btn btn-danger mb-2" />
+                    </div>
+                </form>
             }
         </div>
     }

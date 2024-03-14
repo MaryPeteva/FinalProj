@@ -40,7 +40,7 @@ namespace OnlyTools.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            ToolDetailsModel toolDetails = await _services.GetToolDetails(id);
+            ToolDetailsModel toolDetails = await _services.GetSpecificToolById(id);
             if (toolDetails == null)
             {
                 return NotFound();
@@ -51,7 +51,7 @@ namespace OnlyTools.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var tool = await _services.GetToolDetails(id);
+            var tool = await _services.GetSpecificToolById(id);
             if (tool == null)
             {
                 return NotFound();
@@ -62,7 +62,6 @@ namespace OnlyTools.Web.Controllers
                 Description = tool.Description,
                 RentPrice = tool.RentPrice,
             };
-            //add the picture once it starts working
             return View(toolM);
         }
 
@@ -70,6 +69,13 @@ namespace OnlyTools.Web.Controllers
         public async Task<IActionResult> Edit(int id, ToolUploadModel tool)
         {
             await _services.UpdateToolAsync(id, tool);
+            return RedirectToAction(nameof(All));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id) 
+        {
+            await _services.DeleteToolAsync(id);
             return RedirectToAction(nameof(All));
         }
 

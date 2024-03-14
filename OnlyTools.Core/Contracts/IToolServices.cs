@@ -6,8 +6,9 @@ namespace OnlyTools.Core.Contracts
     public interface IToolServices
     {
         Task AddNewToolAsync(ToolUploadModel tool);
+        Task DeleteToolAsync(int id);
         Task<IEnumerable<ToolModel>> GetAllToolsAsync();
-        Task<ToolDetailsModel> GetToolDetails(int id);
+        Task<ToolDetailsModel> GetSpecificToolById(int id);
         Task UpdateToolAsync(int id, ToolUploadModel tool);
     }
 }

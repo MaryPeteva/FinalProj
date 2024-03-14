@@ -55,6 +55,13 @@ namespace OnlyTools.Core.Services
             }
         }
 
+        public async Task DeleteToolAsync(int id)
+        {
+            Tool tool = await context.Tools.FindAsync(id);
+            context.Remove(tool);
+            await context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<ToolModel>> GetAllToolsAsync() 
         {
             return await context.Tools
@@ -70,7 +77,7 @@ namespace OnlyTools.Core.Services
                 .ToListAsync();
         }
 
-        public async Task<ToolDetailsModel> GetToolDetails(int id)
+        public async Task<ToolDetailsModel> GetSpecificToolById(int id)
         {
             Tool tool = await context.Tools.FindAsync(id);
 
