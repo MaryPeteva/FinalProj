@@ -32,7 +32,6 @@ namespace OnlyTools.Web.Controllers
         {
             string userId = GetUserId();
             tool.OwnerID = userId;
-            //TODO remove user id from AddNewToolAsync
             await _services.AddNewToolAsync(tool);
             return RedirectToAction(nameof(All));
         }
@@ -79,6 +78,19 @@ namespace OnlyTools.Web.Controllers
             return RedirectToAction(nameof(All));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Rent(int id)
+        {
+            var tool = await _services.GetSpecificToolById(id);
+            var userId = GetUserId();
+            if (tool.IsRented)
+            {
+                return BadRequest();
+            }
+            await _services.RentToolAsync(tool, userId);
+            return RedirectToAction(nameof(All));
+
+        }
         private string GetUserId()
         {
             return User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;

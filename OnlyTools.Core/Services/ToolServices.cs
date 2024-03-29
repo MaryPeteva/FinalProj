@@ -100,6 +100,33 @@ namespace OnlyTools.Core.Services
             return toolDetails;
         }
 
+        public async Task RentToolAsync(ToolDetailsModel tool, string userId)
+        {
+            tool.IsRented = true;
+            tool.RenterId = userId;
+            ToolRenter renter = (ToolRenter)await context.Users.FindAsync(userId);
+            if (renter == null)
+            {
+                renter = new ToolRenter()
+                {
+                    Id = userId
+                };
+            }
+            Tool t = new Tool()
+            {
+                Id = tool.Id,
+                Name = tool.Name,
+                Description = tool.Description,
+                RentPrice = tool.RentPrice,
+                OwnerID = tool.OwnerID,
+                IsRented = tool.IsRented,
+                ToolPicture = tool.ToolPicture,
+
+            };
+            renter.RentedTools.Add(t);
+            await context.SaveChangesAsync();
+        }
+
         public async Task UpdateToolAsync(int id, ToolUploadModel tool)
         {
             Tool t = await context.Tools.FindAsync(id);

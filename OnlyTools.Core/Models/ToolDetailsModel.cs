@@ -15,5 +15,7 @@
         public byte[]? ToolPicture { get; set; }
 
         public decimal RentPrice { get; set; }
+
+        public string RenterId { get; set; }
     }
 }
