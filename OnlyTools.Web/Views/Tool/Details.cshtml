@@ -17,7 +17,10 @@
         </dl>
         @if (!Model.IsRented && Model.OwnerID != User.FindFirstValue(ClaimTypes.NameIdentifier))
         {
-            <a asp-controller="Tool" asp-action="Rent" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Rent</a>
+            <form class="ml-2" asp-controller="Tool"
+                  asp-action="Rent" asp-route-id="@Model.Id" method="post">
+                <input class="btn btn-primary" type="submit" value="Rent" />
+            </form>
         }
     </div>
     <div class="col-md-6">

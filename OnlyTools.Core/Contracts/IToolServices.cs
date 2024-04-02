@@ -8,8 +8,8 @@ namespace OnlyTools.Core.Contracts
         Task AddNewToolAsync(ToolUploadModel tool);
         Task DeleteToolAsync(int id);
         Task<IEnumerable<ToolModel>> GetAllToolsAsync();
-        Task<ToolDetailsModel> GetSpecificToolById(int id);
-        Task RentToolAsync(ToolDetailsModel tool, string userId);
+        Task<ToolDetailsModel> GetSpecificToolByIdAsync(int id);
+        Task RentToolAsync(int toolId, string userId);
         Task UpdateToolAsync(int id, ToolUploadModel tool);
     }
 }
