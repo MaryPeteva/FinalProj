@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlyTools.Core.Contracts;
-using OnlyTools.Core.Models;
+using OnlyTools.Core.Models.Tool;
 using System.Security.Claims;
 
 namespace OnlyTools.Web.Controllers
@@ -91,6 +91,14 @@ namespace OnlyTools.Web.Controllers
             await _services.RentToolAsync(tool.Id, userId);
             return RedirectToAction(nameof(All));
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> MyTools() 
+        {
+            var myId = GetUserId();
+            var tools = await _services.GetMyToolsAsync(myId);
+            return View(tools);
         }
         private string GetUserId()
         {

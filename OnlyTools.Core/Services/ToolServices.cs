@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlyTools.Core.Contracts;
-using OnlyTools.Core.Models;
+using OnlyTools.Core.Models.Tool;
 using OnlyTools.Infrastructure.Data;
 using OnlyTools.Infrastructure.Data.Models;
 namespace OnlyTools.Core.Services
@@ -66,6 +66,22 @@ namespace OnlyTools.Core.Services
         {
             return await context.Tools
                 .Select(t => new ToolModel() 
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    OwnerID = t.OwnerID,
+                    RentPrice = t.RentPrice,
+                    ToolPicture = t.ToolPicture
+                })
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<ToolModel>> GetMyToolsAsync(string myId)
+        {
+            return await context.Tools
+                .Where(t => t.OwnerID == myId)
+                .Select(t => new ToolModel()
                 {
                     Id = t.Id,
                     Name = t.Name,
