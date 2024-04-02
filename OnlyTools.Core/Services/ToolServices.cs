@@ -77,6 +77,22 @@ namespace OnlyTools.Core.Services
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<ToolModel>> GetMyRentedToolsAsync(string myId)
+        {
+            return await context.Tools
+               .Where(t => t.RenterID == myId)
+               .Select(t => new ToolModel()
+               {
+                   Id = t.Id,
+                   Name = t.Name,
+                   OwnerID = t.OwnerID,
+                   RentPrice = t.RentPrice,
+                   ToolPicture = t.ToolPicture
+               })
+               .AsNoTracking()
+               .ToListAsync();
+        }
+
         public async Task<IEnumerable<ToolModel>> GetMyToolsAsync(string myId)
         {
             return await context.Tools
@@ -121,6 +137,14 @@ namespace OnlyTools.Core.Services
             var tool = await context.Tools.FindAsync(toolId);
             tool.IsRented = true;
             tool.RenterID = userId;
+            await context.SaveChangesAsync();
+        }
+
+        public async Task ReturnToolAsync(int id)
+        {
+            var tool = await context.Tools.FindAsync(id);
+            tool.IsRented = false;
+            tool.RenterID = null;
             await context.SaveChangesAsync();
         }
 

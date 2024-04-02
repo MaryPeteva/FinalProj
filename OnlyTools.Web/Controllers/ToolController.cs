@@ -100,6 +100,23 @@ namespace OnlyTools.Web.Controllers
             var tools = await _services.GetMyToolsAsync(myId);
             return View(tools);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> MyRentedTools()
+        {
+            var myId = GetUserId();
+            var tools = await _services.GetMyRentedToolsAsync(myId);
+            return View(tools);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Return(int id) 
+        {
+            await _services.ReturnToolAsync(id);
+            return RedirectToAction(nameof(MyRentedTools));
+        }
+
+
         private string GetUserId()
         {
             return User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
