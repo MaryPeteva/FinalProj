@@ -42,6 +42,7 @@ namespace OnlyTools.Controllers
         public async Task<IActionResult> Details(int id)
         {
             TipsDetailedModel tipDetails = await _services.GetSpecificTipByIdAsync(id);
+            tipDetails.Categories = await _categoryServices.GetTipCategoriesAsync();
             if (tipDetails == null)
             {
                 return NotFound();
@@ -57,12 +58,7 @@ namespace OnlyTools.Controllers
             {
                 return NotFound();
             }
-            var newTip = new TipPostModel
-            {
-                Title = tip.Title,
-                Content = tip.Content,
-            };
-            newTip.Categories = await _categoryServices.GetTipCategoriesAsync();
+           tip.Categories = await _categoryServices.GetTipCategoriesAsync();
             return View(tip);
         }
 

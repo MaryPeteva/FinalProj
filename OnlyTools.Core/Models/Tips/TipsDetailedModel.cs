@@ -14,5 +14,6 @@ namespace OnlyTools.Core.Models.Tips
         public DateTime PublishedOn { get; set; }
         public int CategoryId { get; set; }
         public virtual CategoryModel Category { get; set; }
+        public IEnumerable<CategoryModel> Categories { get; set; } = new List<CategoryModel>();
     }
 }

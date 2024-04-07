@@ -84,9 +84,16 @@ namespace OnlyTools.Core.Services
             return Dtip;
         }
 
-        public Task UpdateTipAsync(int id, TipPostModel tip)
+        public async Task UpdateTipAsync(int id, TipPostModel tip)
         {
-            throw new NotImplementedException();
+            Tip t = await context.TipsAndTricks.FindAsync(id);
+            TipCategory cat = await context.TipCategories.FindAsync(tip.CategoryId);
+            t.Title = tip.Title;
+            t.Content = tip.Content;
+            t.CategoryId = tip.CategoryId;
+            t.Category = cat;
+
+            await context.SaveChangesAsync();
         }
     }
 }

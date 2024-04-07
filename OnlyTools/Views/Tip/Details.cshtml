@@ -1,31 +1,4 @@
-﻿@* @model TipsDetailedModel
-
-@{
-    ViewBag.Title = "Details";
-}
-
-<h2>@Model.Title</h2>
-<hr />
-<div class="row">
-    <div class="col-md-6">
-        <dl class="row">
-            <dt class="col-sm-3">Category:</dt>
-            <dd class="col-sm-9">@Model.Category</dd>
-            <dd class="col-sm-9">@Model.Content</dd>
-
-        </dl>
-        @if (Model.AuthorId.ToString("D") != User.FindFirstValue(ClaimTypes.NameIdentifier))
-        {
-            
-            <form class="ml-2" asp-controller="Tip"
-                  asp-action="Like" asp-route-id="@Model.Id" method="post">
-                <input class="btn btn-primary" type="submit" value="Like" />
-            </form>
-        }
-    </div>
-</div> *@
-
-@model TipsDetailedModel
+﻿@model TipsDetailedModel
 
 @{
     ViewBag.Title = "Article Details";
