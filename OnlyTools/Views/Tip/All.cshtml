@@ -1,0 +1,68 @@
+﻿@model List<TipsAllModel>
+@{
+    ViewBag.Title = "What will be your next project?";
+}
+
+<style>
+    .card-img-top {
+        width: 200px;
+        height: auto;
+    }
+</style>
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @if (!Model.Any())
+    {
+        <h2>No tips shared yet!</h2>
+        <h4>Be the first to share knowledge!</h4>
+    }
+    else
+    {
+        @foreach (var tip in Model)
+        {
+            <div class="card col-4" style="width: 20rem; ">
+                <div class="card-body">
+                    <h5 class="card-title mt-1">@tip.Title</h5>
+                    <p class="card-text">@GetFirstSentences(tip.Content)</p> <!-- Display first sentences from content -->
+                </div>
+
+                <a asp-controller="Tip" asp-action="Details" asp-route-id="@tip.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Read More</a>
+                @if (User.Identity.IsAuthenticated && tip.AuthorId.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier))
+                {
+                    <a asp-controller="Tip" asp-action="Edit" asp-route-id="@tip.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+                    <form class="mt-2" asp-controller="Tip" asp-action="Delete" asp-route-id="@tip.Id">
+                        <div class="d-grid gap-2">
+                            <input type="submit" value="Delete post" class="btn btn-danger mb-2" />
+                        </div>
+                    </form>
+                }
+            </div>
+        }
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+@functions {
+    // Helper function to get the first couple of sentences from content
+    public string GetFirstSentences(string content)
+    {
+        if (string.IsNullOrWhiteSpace(content))
+        {
+            return string.Empty;
+        }
+
+        // Split content into sentences
+        var sentences = content.Split(new[] { '.', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
+
+        // Get the first couple of sentences
+        var firstSentences = string.Join(". ", sentences.Take(2));
+
+        return firstSentences;
+    }
+}

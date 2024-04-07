@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlyTools.Core.Contracts;
+using OnlyTools.Core.Models.Category;
 using OnlyTools.Core.Models.Tool;
 using OnlyTools.Infrastructure.Data;
 using OnlyTools.Infrastructure.Data.Models;
 namespace OnlyTools.Core.Services
 {
-    public class ToolServices:IToolServices
+    public class ToolServices : IToolServices
     {
         private readonly OnlyToolsDbContext context;
 
@@ -16,14 +17,17 @@ namespace OnlyTools.Core.Services
 
         public async Task AddNewToolAsync(ToolUploadModel tool)
         {
-            var newTool = new Tool() 
+            ToolCategory cat = await context.Categories.FindAsync(tool.CategoryId);
+            var newTool = new Tool()
             {
                 Name = tool.Name,
                 Description = tool.Description,
                 RentPrice = tool.RentPrice,
-                OwnerID = tool.OwnerID
+                OwnerID = tool.OwnerID,
+                CategoryId = tool.CategoryId,
+                Category = cat
             };
- 
+
             if (tool.ToolPicture != null)
             {
                 using (var memoryStream = new MemoryStream())
@@ -37,7 +41,7 @@ namespace OnlyTools.Core.Services
                     {
                         // Handle the exception (e.g., log it, return an error response)
                         await Console.Out.WriteLineAsync($"Error uploading picture: {ex.Message}");
-                         // Rethrow the exception to indicate failure
+                        // Rethrow the exception to indicate failure
                     }
                 }
             }
@@ -58,26 +62,34 @@ namespace OnlyTools.Core.Services
         public async Task DeleteToolAsync(int id)
         {
             Tool tool = await context.Tools.FindAsync(id);
+            if (tool.IsRented) 
+            {
+                throw new Exception("Cannot remove rented tool!");
+            }
             context.Remove(tool);
             await context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ToolModel>> GetAllToolsAsync() 
+        public async Task<IEnumerable<ToolModel>> GetAllToolsAsync()
         {
             return await context.Tools
-                .Select(t => new ToolModel() 
+                .Select(t => new ToolModel()
                 {
                     Id = t.Id,
                     Name = t.Name,
                     OwnerID = t.OwnerID,
                     RentPrice = t.RentPrice,
-                    ToolPicture = t.ToolPicture
+                    ToolPicture = t.ToolPicture,
+                    Category = new CategoryModel() {
+                        Id = t.CategoryId,
+                        Name = t.Category.Name
+                    }
                 })
                 .AsNoTracking()
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<ToolModel>> GetMyRentedToolsAsync(string myId)
+        public async Task<IEnumerable<ToolModel>> GetMyRentedToolsAsync(Guid myId)
         {
             return await context.Tools
                .Where(t => t.RenterID == myId)
@@ -87,13 +99,18 @@ namespace OnlyTools.Core.Services
                    Name = t.Name,
                    OwnerID = t.OwnerID,
                    RentPrice = t.RentPrice,
-                   ToolPicture = t.ToolPicture
+                   ToolPicture = t.ToolPicture,
+                   Category = new CategoryModel()
+                   {
+                       Id = t.CategoryId,
+                       Name = t.Category.Name
+                   }
                })
                .AsNoTracking()
                .ToListAsync();
         }
 
-        public async Task<IEnumerable<ToolModel>> GetMyToolsAsync(string myId)
+        public async Task<IEnumerable<ToolModel>> GetMyToolsAsync(Guid myId)
         {
             return await context.Tools
                 .Where(t => t.OwnerID == myId)
@@ -103,7 +120,12 @@ namespace OnlyTools.Core.Services
                     Name = t.Name,
                     OwnerID = t.OwnerID,
                     RentPrice = t.RentPrice,
-                    ToolPicture = t.ToolPicture
+                    ToolPicture = t.ToolPicture,
+                    Category = new CategoryModel()
+                    {
+                        Id = t.CategoryId,
+                        Name = t.Category.Name
+                    }
                 })
                 .AsNoTracking()
                 .ToListAsync();
@@ -112,6 +134,7 @@ namespace OnlyTools.Core.Services
         public async Task<ToolDetailsModel> GetSpecificToolByIdAsync(int id)
         {
             Tool tool = await context.Tools.FindAsync(id);
+            ToolCategory cat = await context.Categories.FindAsync(tool.CategoryId);
 
             if (tool == null)
             {
@@ -126,13 +149,14 @@ namespace OnlyTools.Core.Services
                 OwnerID = tool.OwnerID,
                 IsRented = tool.IsRented,
                 RentPrice = tool.RentPrice,
-                ToolPicture = tool.ToolPicture
+                ToolPicture = tool.ToolPicture,
+                Category = cat.Name
             };
 
             return toolDetails;
         }
 
-        public async Task RentToolAsync(int toolId, string userId)
+        public async Task RentToolAsync(int toolId, Guid userId)
         {
             var tool = await context.Tools.FindAsync(toolId);
             tool.IsRented = true;
@@ -151,9 +175,12 @@ namespace OnlyTools.Core.Services
         public async Task UpdateToolAsync(int id, ToolUploadModel tool)
         {
             Tool t = await context.Tools.FindAsync(id);
+            ToolCategory cat = await context.Categories.FindAsync(tool.CategoryId);
             t.Name = tool.Name;
             t.Description = tool.Description;
             t.RentPrice = tool.RentPrice;
+            t.CategoryId = tool.CategoryId;
+            t.Category = cat;
             using (var memoryStream = new MemoryStream())
             {
                 try
@@ -171,5 +198,6 @@ namespace OnlyTools.Core.Services
 
             await context.SaveChangesAsync();
         }
+
     }
 }

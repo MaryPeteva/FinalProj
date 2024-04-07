@@ -22,10 +22,11 @@ namespace OnlyTools.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -49,7 +50,7 @@ namespace OnlyTools.Infrastructure.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,9 +64,8 @@ namespace OnlyTools.Infrastructure.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -74,20 +74,100 @@ namespace OnlyTools.Infrastructure.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -141,11 +221,9 @@ namespace OnlyTools.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.JobListing", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -153,81 +231,154 @@ namespace OnlyTools.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
+                    b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<DateTime>("Posted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("PosterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("PosterId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("JobListings");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.Like", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                    b.Property<int>("TipId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("UserId", "TipId");
 
-                    b.Property<string>("UserId")
+                    b.HasIndex("TipId");
+
+                    b.ToTable("Likes");
+                });
+
+            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.Tip", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int")
+                        .HasComment("Category unique identifier, integer representation");
+
+                    b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
 
-                    b.HasKey("LoginProvider", "ProviderKey");
+                    b.Property<DateTime>("PubllishedOn")
+                        .HasColumnType("datetime2");
 
-                    b.HasIndex("UserId");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("TipsAndTricks");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.TipCategory", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasComment("unique integer category identifier");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("Category name, string representation");
 
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("Id");
 
-                    b.HasKey("UserId", "LoginProvider", "Name");
+                    b.ToTable("TipCategories");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Kitchen Renovations"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Bathroom Renovations"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Flooring Solutions"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Interior Painting"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Exterior Upgrades"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Plumbing Fixes"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Electrical Repairs"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "HVAC Maintenance"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Foundation and Structural Repairs"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "DIY Home Improvement"
+                        });
                 });
 
             modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.Tool", b =>
@@ -237,6 +388,16 @@ namespace OnlyTools.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<Guid?>("ApplicationUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ApplicationUserId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int")
+                        .HasComment("Category unique identifier, integer representation");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -254,17 +415,16 @@ namespace OnlyTools.Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasComment("Name of the tool to be displayed");
 
-                    b.Property<string>("OwnerID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<Guid>("OwnerID")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Foreign key referencing the owner of the tool");
 
                     b.Property<decimal>("RentPrice")
                         .HasColumnType("decimal(18,2)")
                         .HasComment("Price for renting the tool");
 
-                    b.Property<string>("RenterID")
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<Guid?>("RenterID")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Foreign key referencing the renter of the tool");
 
                     b.Property<byte[]>("ToolPicture")
@@ -273,6 +433,12 @@ namespace OnlyTools.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("ApplicationUserId1");
+
+                    b.HasIndex("CategoryId");
+
                     b.HasIndex("OwnerID");
 
                     b.HasIndex("RenterID");
@@ -280,96 +446,218 @@ namespace OnlyTools.Infrastructure.Migrations
                     b.ToTable("Tools");
                 });
 
-            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.ToolOwner", b =>
+            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.ToolCategory", b =>
                 {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasComment("unique integer category identifier");
 
-                    b.HasDiscriminator().HasValue("ToolOwner");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("Category name, string representation");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Power Tools"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Hand Tools"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Gardening Tools"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Woodworking Tools"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Measuring Tools"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Masonry Tool"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Other Tools"
+                        });
                 });
 
-            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.ToolRenter", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.HasDiscriminator().HasValue("ToolRenter");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.JobListing", b =>
+                {
+                    b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", "Poster")
+                        .WithMany()
+                        .HasForeignKey("PosterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Poster");
+                });
+
+            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.Like", b =>
+                {
+                    b.HasOne("OnlyTools.Infrastructure.Data.Models.Tip", "Tip")
+                        .WithMany("LikedBy")
+                        .HasForeignKey("TipId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", "User")
+                        .WithMany("LikedTips")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Tip");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.Tip", b =>
+                {
+                    b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnlyTools.Infrastructure.Data.Models.TipCategory", "Category")
+                        .WithMany("Tips")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.Tool", b =>
                 {
-                    b.HasOne("OnlyTools.Infrastructure.Data.Models.ToolOwner", "Owner")
+                    b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", null)
                         .WithMany("OwnedTools")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", null)
+                        .WithMany("RentedTools")
+                        .HasForeignKey("ApplicationUserId1");
+
+                    b.HasOne("OnlyTools.Infrastructure.Data.Models.ToolCategory", "Category")
+                        .WithMany("Tools")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", "Owner")
+                        .WithMany()
                         .HasForeignKey("OwnerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OnlyTools.Infrastructure.Data.Models.ToolRenter", "Renter")
-                        .WithMany("RentedTools")
+                    b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", "Renter")
+                        .WithMany()
                         .HasForeignKey("RenterID");
+
+                    b.Navigation("Category");
 
                     b.Navigation("Owner");
 
                     b.Navigation("Renter");
                 });
 
-            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.ToolOwner", b =>
+            modelBuilder.Entity("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", b =>
                 {
+                    b.Navigation("LikedTips");
+
                     b.Navigation("OwnedTools");
+
+                    b.Navigation("RentedTools");
                 });
 
-            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.ToolRenter", b =>
+            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.Tip", b =>
                 {
-                    b.Navigation("RentedTools");
+                    b.Navigation("LikedBy");
+                });
+
+            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.TipCategory", b =>
+                {
+                    b.Navigation("Tips");
+                });
+
+            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.ToolCategory", b =>
+                {
+                    b.Navigation("Tools");
                 });
 #pragma warning restore 612, 618
         }

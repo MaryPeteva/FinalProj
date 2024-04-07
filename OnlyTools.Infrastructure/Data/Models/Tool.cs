@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OnlyTools.Infrastructure.Data.IdentityModels;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static OnlyTools.Infrastructure.Data.Models.ToolCategory;
 using static OnlyTools.Infrastructure.Data.Utils.ValidationsConstants.ToolValidationConstants;
 
 namespace OnlyTools.Infrastructure.Data.Models
@@ -13,27 +15,27 @@ namespace OnlyTools.Infrastructure.Data.Models
         [Required]
         [Comment("Name of the tool to be displayed")]
         [MaxLength(ToolNameMaxLen)]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         [Required]
         [MaxLength(ToolDescriptionMaxLen)]
         [Comment("Description of the tool to be displayed")]
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
         [Required]
         [ForeignKey(nameof(OwnerID))]
         [Comment("Foreign key referencing the owner of the tool")]
-        public string OwnerID { get; set; }
+        public Guid OwnerID { get; set; }
 
         [Comment("Navigation property representing the owner of the tool")]
-        public ToolOwner Owner { get; set; }
+        public ApplicationUser Owner { get; set; } = null!;
 
         [ForeignKey(nameof(RenterID))]
         [Comment("Foreign key referencing the renter of the tool")]
-        public string? RenterID { get; set; }
+        public Guid? RenterID { get; set; }
 
         [Comment("Navigation property representing the renter of the tool")]
-        public ToolRenter? Renter { get; set; }
+        public ApplicationUser? Renter { get; set; }
 
         [Required]
         [Comment("Indicates whether the tool is currently rented out")]
@@ -46,6 +48,14 @@ namespace OnlyTools.Infrastructure.Data.Models
         [Column(TypeName = "decimal(18, 2)")]
         [Comment("Price for renting the tool")]
         public decimal RentPrice { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(CategoryId))]
+        [Comment("Category unique identifier, integer representation")]
+        public int CategoryId { get; set; }
+
+        [Required]
+        [Comment("category, obj representation")]
+        public ToolCategory Category { get; set; } = null!;
     }
 }
-

@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using OnlyTools.Infrastructure.Data.IdentityModels
+
+<ul class="navbar-nav">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><b>Hello, @User.Identity?.Name!</b></a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-controller="User" asp-action="Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-white"><b>Logout</b></button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="Register"><b>Register</b></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-controller="User" asp-action="Login"><b>Login</b></a>
+        </li>
+    }
+</ul>
