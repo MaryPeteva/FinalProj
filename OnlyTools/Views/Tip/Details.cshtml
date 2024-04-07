@@ -1,35 +1,64 @@
-﻿@model ToolDetailsModel
+﻿@* @model TipsDetailedModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>@Model.Name</h2>
+<h2>@Model.Title</h2>
 <hr />
 <div class="row">
     <div class="col-md-6">
         <dl class="row">
-            <dt class="col-sm-3">Tool Category:</dt>
+            <dt class="col-sm-3">Category:</dt>
             <dd class="col-sm-9">@Model.Category</dd>
-            <dt class="col-sm-3">Description:</dt>
-            <dd class="col-sm-9">@Model.Description</dd>
+            <dd class="col-sm-9">@Model.Content</dd>
 
-            <dt class="col-sm-3">Rent Price:</dt>
-            <dd class="col-sm-9">@Model.RentPrice</dd>
         </dl>
-        @if (!Model.IsRented && Model.OwnerID.ToString("D") != User.FindFirstValue(ClaimTypes.NameIdentifier))
+        @if (Model.AuthorId.ToString("D") != User.FindFirstValue(ClaimTypes.NameIdentifier))
         {
             
-            <form class="ml-2" asp-controller="Tool"
-                  asp-action="Rent" asp-route-id="@Model.Id" method="post">
-                <input class="btn btn-primary" type="submit" value="Rent" />
+            <form class="ml-2" asp-controller="Tip"
+                  asp-action="Like" asp-route-id="@Model.Id" method="post">
+                <input class="btn btn-primary" type="submit" value="Like" />
             </form>
         }
     </div>
-    <div class="col-md-6">
-        @if (Model.ToolPicture != null)
-        {
-            <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.ToolPicture)" class="img-fluid" alt="Tool Image" />
-        }
+</div> *@
+
+@model TipsDetailedModel
+
+@{
+    ViewBag.Title = "Article Details";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">@Model.Title</h2>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p><strong>Category:</strong></p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p>@Model.Category.Name</p>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <p>@Model.Content</p>
+                    </div>
+                    @if (Model.AuthorId.ToString("D") != User.FindFirstValue(ClaimTypes.NameIdentifier))
+                    {
+                        <div class="text-center mt-4">
+                            <form asp-controller="Tool" asp-action="Like" asp-route-id="@Model.Id" method="post">
+                                <button class="btn btn-primary" type="submit">Like</button>
+                            </form>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
     </div>
 </div>

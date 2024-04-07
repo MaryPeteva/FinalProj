@@ -26,6 +26,8 @@
             <div class="card col-4" style="width: 20rem; ">
                 <div class="card-body">
                     <h5 class="card-title mt-1">@tip.Title</h5>
+                    <p class="mb-0"><span class="fw-bold">Author: </span>@tip.Author.UserName</p>
+                    <br></br>
                     <p class="card-text">@GetFirstSentences(tip.Content)</p> <!-- Display first sentences from content -->
                 </div>
 
@@ -60,7 +62,7 @@
         // Split content into sentences
         var sentences = content.Split(new[] { '.', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
 
-        // Get the first couple of sentences
+        // Get the first 2 of sentences
         var firstSentences = string.Join(". ", sentences.Take(2));
 
         return firstSentences;
