@@ -15,9 +15,26 @@ namespace OnlyTools.Controllers
             _services = services;
             _categoryServices = categoryServices;
         }
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int page = 1, int pageSize = 5)
         {
             var tips = await _services.GetAllTipsAsync();
+            int skip = (page - 1) * pageSize;
+            int totalItems = tips.Count();
+            tips = tips
+                .Skip(skip)
+                .Take(pageSize)
+                .ToList();
+
+
+            int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+            bool hasPreviousPage = page > 1;
+            bool hasNextPage = page < totalPages;
+
+            ViewBag.PageIndex = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.HasPreviousPage = hasPreviousPage;
+            ViewBag.HasNextPage = hasNextPage;
+
             return View(tips);
         }
 

@@ -5,10 +5,6 @@ namespace OnlyTools.Controllers
 {
     public class BaseController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         public Guid GetUserId()
         {

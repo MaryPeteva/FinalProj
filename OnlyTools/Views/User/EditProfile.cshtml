@@ -1,0 +1,36 @@
+﻿@model UserModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Profile</title>
+</head>
+<body>
+    <h1>Edit Profile</h1>
+    <form method="post" action="/User/UpdateProfile" enctype="multipart/form-data">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="@Model.UserName" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="@Model.Email" required>
+        </div>
+        <div>
+            <label for="newPassword">New Password:</label>
+            <input type="password" id="newPassword" name="newPassword">
+        </div>
+        <div>
+            <label for="confirmPassword">Confirm New Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword">
+        </div>
+        <div>
+            <label for="profilePicture">Profile Picture:</label>
+            <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+        </div>
+        <div>
+            <button type="submit">Update Profile</button>
+        </div>
+    </form>
+</body>
+</html>

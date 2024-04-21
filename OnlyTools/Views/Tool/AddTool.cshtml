@@ -26,25 +26,31 @@
             </div>
             <div class="form-group">
                 <label for="">Tool Image</label>
-                <input type="file" class="form-control" name="ToolImage" />
+                <input asp-for="ToolPicture" class="form-control" />
+                <span asp-validation-for="ToolPicture" class="text-danger"></span>
             </div>
         </div>
         <div class="mb-3">
             <div class="mb-3">
-                <div class="mb-3">
-                    <label asp-for="@Model.CategoryId" class="form-label-add-edit">Select Category</label>
-                    <select asp-for="@Model.CategoryId" class="form-control" aria-required="true">
-                        <option disabled selected value="">Select Category...</option>
-                        @foreach (var category in Model.Categories)
-                        {
-                            <option value="@category.Id">@category.Name</option>
-                        }
-                    </select>
-                    <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Add Tool</button>
-        </div>
+                <label asp-for="@Model.CategoryId" class="form-label-add-edit">Select Category</label>
+                <select asp-for="@Model.CategoryId" class="form-control" aria-required="true">
+                    <option disabled selected value="">Select Category...</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Add Tool</button>
+            </div>
 
     </form>
 </div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

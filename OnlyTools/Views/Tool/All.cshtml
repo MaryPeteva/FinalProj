@@ -1,6 +1,6 @@
 ﻿@model List<ToolModel>
 @{
-    ViewBag.Title = "What do you need for you next project?";
+    ViewBag.Title = "What do you need for your next project?";
 }
 
 <style>
@@ -23,10 +23,9 @@
     {
         @foreach (var tool in Model)
         {
-            <div class="card col-4" style="width: 20rem; ">
+            <div class="card col-4" style="width: 20rem;">
                 @if (tool.ToolPicture != null)
                 {
-
                     string imageBase64 = Convert.ToBase64String(tool.ToolPicture);
                     string imageSrc = $"data:image/jpeg;base64,{imageBase64}";
                     <img src="@imageSrc" class="card-img-top" alt="Tool Image">
@@ -50,6 +49,36 @@
             </div>
         }
     }
+
+    <!-- Pagination controls -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            @if (ViewBag.HasPreviousPage)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="?page=@(ViewBag.PageIndex - 1)" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+            }
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.PageIndex ? "active" : "")">
+                    <a class="page-link" href="?page=@i">@i</a>
+                </li>
+            }
+            @if (ViewBag.HasNextPage)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="?page=@(ViewBag.PageIndex + 1)" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
 </div>
 
 @section Scripts {

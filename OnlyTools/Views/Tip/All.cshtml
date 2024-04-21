@@ -23,12 +23,12 @@
     {
         @foreach (var tip in Model)
         {
-            <div class="card col-4" style="width: 20rem; ">
+            <div class="card col-4" style="width: 20rem;">
                 <div class="card-body">
                     <h5 class="card-title mt-1">@tip.Title</h5>
                     <p class="mb-0"><span class="fw-bold">Author: </span>@tip.Author.UserName</p>
-                    <br></br>
-                    <p class="card-text">@GetFirstSentences(tip.Content)</p> <!-- Display first sentences from content -->
+                    <br />
+                    <p class="card-text">@GetFirstSentences(tip.Content)</p>
                 </div>
 
                 <a asp-controller="Tip" asp-action="Details" asp-route-id="@tip.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Read More</a>
@@ -44,6 +44,34 @@
             </div>
         }
     }
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            @if (ViewBag.HasPreviousPage)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="?page=@(ViewBag.PageIndex - 1)" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+            }
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.PageIndex ? "active" : "")">
+                    <a class="page-link" href="?page=@i">@i</a>
+                </li>
+            }
+            @if (ViewBag.HasNextPage)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="?page=@(ViewBag.PageIndex + 1)" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
 </div>
 
 @section Scripts {

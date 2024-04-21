@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using OnlyTools.Core.Contracts;
+using OnlyTools.Core.Models.User;
 
 namespace OnlyTools.Controllers
 {
@@ -13,13 +15,17 @@ namespace OnlyTools.Controllers
         private readonly UserManager<ApplicationUser> userManager;
 
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly IUserServices userServices;
 
         public UserController(
             UserManager<ApplicationUser> _userManager,
-            SignInManager<ApplicationUser> _signInManager)
+            SignInManager<ApplicationUser> _signInManager,
+             IUserServices _userServices)
+
         {
             userManager = _userManager;
             signInManager = _signInManager;
+            userServices = _userServices;
         }
 
         [HttpGet]
@@ -147,6 +153,37 @@ namespace OnlyTools.Controllers
             await signInManager.SignOutAsync();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Profile()
+        {
+            Guid id = GetUserId();
+            UserModel profile = await userServices.GetProfileAsync(id);
+            return View(profile);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditProfile()
+        {
+            Guid id = GetUserId();
+            UserModel userProfile = await userServices.GetProfileAsync(id);
+            return View(userProfile);
+        }
+
+        [HttpPost]
+        public void UploadPicture(IFormFile pic)
+        {
+            if (pic == null || pic.Length == 0)
+            {
+                RedirectToAction("Profile");
+            }
+            else
+            {
+                Guid id = GetUserId();
+                userServices.UploadProfilePicture(id, pic);
+                RedirectToAction("Profile");
+            }
         }
 
     }

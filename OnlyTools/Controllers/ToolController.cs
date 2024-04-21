@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlyTools.Controllers;
 using OnlyTools.Core.Contracts;
 using OnlyTools.Core.Models.Tool;
+using OnlyTools.Models;
 
 namespace OnlyTools.Web.Controllers
 {
@@ -16,11 +18,29 @@ namespace OnlyTools.Web.Controllers
             _services = services;
             _categoryServices = categoryServices;
         }
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int page = 1, int pageSize = 5)
         {
             var tools = await _services.GetAllToolsAsync();
+            int skip = (page - 1) * pageSize;
+            int totalItems = tools.Count();
+            tools = tools
+                .Skip(skip)
+                .Take(pageSize)
+                .ToList();
+
+            
+            int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+            bool hasPreviousPage = page > 1;
+            bool hasNextPage = page < totalPages;
+
+            ViewBag.PageIndex = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.HasPreviousPage = hasPreviousPage;
+            ViewBag.HasNextPage = hasNextPage;
+
             return View(tools);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> AddTool()
@@ -31,7 +51,7 @@ namespace OnlyTools.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddTool(ToolUploadModel tool) 
+        public async Task<IActionResult> AddTool(ToolUploadModel tool)
         {
             Guid userId = GetUserId();
             tool.OwnerID = userId;
@@ -76,7 +96,7 @@ namespace OnlyTools.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(int id) 
+        public async Task<IActionResult> Delete(int id)
         {
             await _services.DeleteToolAsync(id);
             return RedirectToAction(nameof(All));
@@ -98,7 +118,7 @@ namespace OnlyTools.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> MyTools() 
+        public async Task<IActionResult> MyTools()
         {
             Guid myId = GetUserId();
             var tools = await _services.GetMyToolsAsync(myId);
@@ -114,7 +134,7 @@ namespace OnlyTools.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Return(int id) 
+        public async Task<IActionResult> Return(int id)
         {
             await _services.ReturnToolAsync(id);
             return RedirectToAction(nameof(MyRentedTools));

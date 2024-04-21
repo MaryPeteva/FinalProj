@@ -200,6 +200,10 @@ namespace OnlyTools.Infrastructure.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<byte[]>("ProfilePicture")
+                        .HasColumnType("varbinary(max)")
+                        .HasComment("profile picture, stored as a byte array, optional");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -280,6 +284,9 @@ namespace OnlyTools.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<Guid?>("ApplicationUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("AuthorId")
                         .HasColumnType("uniqueidentifier");
 
@@ -301,6 +308,8 @@ namespace OnlyTools.Infrastructure.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("AuthorId");
 
@@ -586,6 +595,10 @@ namespace OnlyTools.Infrastructure.Migrations
 
             modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.Tip", b =>
                 {
+                    b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", null)
+                        .WithMany("PostedTips")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId")
@@ -641,6 +654,8 @@ namespace OnlyTools.Infrastructure.Migrations
                     b.Navigation("LikedTips");
 
                     b.Navigation("OwnedTools");
+
+                    b.Navigation("PostedTips");
 
                     b.Navigation("RentedTools");
                 });
