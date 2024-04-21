@@ -13,7 +13,7 @@ namespace OnlyTools.Infrastructure.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -27,8 +27,7 @@ namespace OnlyTools.Infrastructure.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -50,12 +49,38 @@ namespace OnlyTools.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TipCategories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false, comment: "unique integer category identifier")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, comment: "Category name, string representation")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TipCategories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ToolCategories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false, comment: "unique integer category identifier")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, comment: "Category name, string representation")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ToolCategories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -76,7 +101,7 @@ namespace OnlyTools.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -98,7 +123,7 @@ namespace OnlyTools.Infrastructure.Migrations
                     LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -115,8 +140,8 @@ namespace OnlyTools.Infrastructure.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -139,7 +164,7 @@ namespace OnlyTools.Infrastructure.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -156,6 +181,58 @@ namespace OnlyTools.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "JobListings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Posted = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PosterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobListings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_JobListings_AspNetUsers_PosterId",
+                        column: x => x.PosterId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TipsAndTricks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: false),
+                    AuthorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PubllishedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false, comment: "Category unique identifier, integer representation")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TipsAndTricks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TipsAndTricks_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TipsAndTricks_TipCategories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "TipCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tools",
                 columns: table => new
                 {
@@ -163,15 +240,28 @@ namespace OnlyTools.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, comment: "Name of the tool to be displayed"),
                     Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false, comment: "Description of the tool to be displayed"),
-                    OwnerID = table.Column<string>(type: "nvarchar(450)", nullable: false, comment: "Foreign key referencing the owner of the tool"),
-                    RenterID = table.Column<string>(type: "nvarchar(450)", nullable: true, comment: "Foreign key referencing the renter of the tool"),
+                    OwnerID = table.Column<Guid>(type: "uniqueidentifier", nullable: false, comment: "Foreign key referencing the owner of the tool"),
+                    RenterID = table.Column<Guid>(type: "uniqueidentifier", nullable: true, comment: "Foreign key referencing the renter of the tool"),
                     IsRented = table.Column<bool>(type: "bit", nullable: false, comment: "Indicates whether the tool is currently rented out"),
                     ToolPicture = table.Column<byte[]>(type: "varbinary(max)", nullable: true, comment: "Picture of the tool, stored as a byte array, optional"),
-                    RentPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false, comment: "Price for renting the tool")
+                    RentPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false, comment: "Price for renting the tool"),
+                    CategoryId = table.Column<int>(type: "int", nullable: false, comment: "Category unique identifier, integer representation"),
+                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ApplicationUserId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tools", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tools_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Tools_AspNetUsers_ApplicationUserId1",
+                        column: x => x.ApplicationUserId1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Tools_AspNetUsers_OwnerID",
                         column: x => x.OwnerID,
@@ -183,6 +273,36 @@ namespace OnlyTools.Infrastructure.Migrations
                         column: x => x.RenterID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Tools_ToolCategories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "ToolCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Likes",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TipId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Likes", x => new { x.UserId, x.TipId });
+                    table.ForeignKey(
+                        name: "FK_Likes_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Likes_TipsAndTricks_TipId",
+                        column: x => x.TipId,
+                        principalTable: "TipsAndTricks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -225,6 +345,41 @@ namespace OnlyTools.Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_JobListings_PosterId",
+                table: "JobListings",
+                column: "PosterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Likes_TipId",
+                table: "Likes",
+                column: "TipId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TipsAndTricks_AuthorId",
+                table: "TipsAndTricks",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TipsAndTricks_CategoryId",
+                table: "TipsAndTricks",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tools_ApplicationUserId",
+                table: "Tools",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tools_ApplicationUserId1",
+                table: "Tools",
+                column: "ApplicationUserId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tools_CategoryId",
+                table: "Tools",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tools_OwnerID",
                 table: "Tools",
                 column: "OwnerID");
@@ -253,13 +408,28 @@ namespace OnlyTools.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "JobListings");
+
+            migrationBuilder.DropTable(
+                name: "Likes");
+
+            migrationBuilder.DropTable(
                 name: "Tools");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "TipsAndTricks");
+
+            migrationBuilder.DropTable(
+                name: "ToolCategories");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "TipCategories");
         }
     }
 }

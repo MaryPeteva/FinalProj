@@ -24,7 +24,7 @@ C:\Users\User\source\repos\FinalProj\OnlyTools.Core\obj\Debug\net6.0\OnlyTools.C
 C:\Users\User\source\repos\FinalProj\OnlyTools.Core\obj\Debug\net6.0\OnlyTools.Core.AssemblyInfo.cs
 C:\Users\User\source\repos\FinalProj\OnlyTools.Core\obj\Debug\net6.0\OnlyTools.Core.csproj.CoreCompileInputs.cache
 C:\Users\User\source\repos\FinalProj\OnlyTools.Core\obj\Debug\net6.0\OnlyTools.Core.sourcelink.json
-C:\Users\User\source\repos\FinalProj\OnlyTools.Core\obj\Debug\net6.0\OnlyTools.Core.csproj.CopyComplete
+C:\Users\User\source\repos\FinalProj\OnlyTools.Core\obj\Debug\net6.0\OnlyTool.524B0369.Up2Date
 C:\Users\User\source\repos\FinalProj\OnlyTools.Core\obj\Debug\net6.0\OnlyTools.Core.dll
 C:\Users\User\source\repos\FinalProj\OnlyTools.Core\obj\Debug\net6.0\refint\OnlyTools.Core.dll
 C:\Users\User\source\repos\FinalProj\OnlyTools.Core\obj\Debug\net6.0\OnlyTools.Core.pdb

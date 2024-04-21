@@ -25,7 +25,7 @@
                     @if (Model.AuthorId.ToString("D") != User.FindFirstValue(ClaimTypes.NameIdentifier))
                     {
                         <div class="text-center mt-4">
-                            <form asp-controller="Tool" asp-action="Like" asp-route-id="@Model.Id" method="post">
+                            <form asp-controller="Tip" asp-action="Like" asp-route-id="@Model.Id" method="post">
                                 <button class="btn btn-primary" type="submit">Like</button>
                             </form>
                         </div>

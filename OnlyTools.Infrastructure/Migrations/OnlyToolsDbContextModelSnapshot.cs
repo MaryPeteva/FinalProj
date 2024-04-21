@@ -463,7 +463,7 @@ namespace OnlyTools.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("ToolCategories");
 
                     b.HasData(
                         new

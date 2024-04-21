@@ -3,6 +3,7 @@ using OnlyTools.Core.Contracts;
 using OnlyTools.Core.Models.Category;
 using OnlyTools.Core.Models.Tips;
 using OnlyTools.Infrastructure.Data;
+using OnlyTools.Infrastructure.Data.IdentityModels;
 using OnlyTools.Infrastructure.Data.Models;
 
 namespace OnlyTools.Core.Services
@@ -69,6 +70,7 @@ namespace OnlyTools.Core.Services
             TipCategory cat = await context.TipCategories.FindAsync(tip.CategoryId);
             TipsDetailedModel Dtip = new TipsDetailedModel() 
             {
+                Id = tip.Id,
                 Title = tip.Title,
                 Content = tip.Content,
                 PublishedOn = tip.PubllishedOn,
@@ -82,6 +84,36 @@ namespace OnlyTools.Core.Services
             };
 
             return Dtip;
+        }
+
+        public async Task LikeTipAsync(Guid myId, int id)
+        {
+            await Console.Out.WriteLineAsync("IN LIKE SERVICE");
+            ApplicationUser user = await context.Users.FindAsync(myId);
+            if (user == null) 
+            {
+                throw new Exception($"No user with id {myId} found!");
+            }
+            await Console.Out.WriteLineAsync("USER DID NOT BOOM!!!");
+            Tip tip = await context.TipsAndTricks.FindAsync(id);
+
+            if (tip == null)
+            {
+                throw new Exception($"No tip with id {id} found!");
+            }
+            await Console.Out.WriteLineAsync("TIP DID NOT BOOM!!!");
+            Like like = new Like()
+            {
+                Tip = tip,
+                TipId = tip.Id,
+                User = user,
+                UserId = user.Id
+            };
+            context.Likes.AddAsync(like);
+            user.LikedTips.Add(like);
+            tip.LikedBy.Add(like);
+            context.SaveChanges();
+
         }
 
         public async Task UpdateTipAsync(int id, TipPostModel tip)

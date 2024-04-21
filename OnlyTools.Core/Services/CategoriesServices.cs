@@ -16,7 +16,7 @@ namespace OnlyTools.Core.Services
 
         public async Task<IEnumerable<CategoryModel>> GetToolCategoriesAsync()
         {
-            return await context.Categories
+            return await context.ToolCategories
                 .AsNoTracking()
                 .Select(t => new CategoryModel()
                 {

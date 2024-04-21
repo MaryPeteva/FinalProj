@@ -12,8 +12,8 @@ using OnlyTools.Infrastructure.Data;
 namespace OnlyTools.Infrastructure.Migrations
 {
     [DbContext(typeof(OnlyToolsDbContext))]
-    [Migration("20240407120522_INIT")]
-    partial class INIT
+    [Migration("20240415204201_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -329,58 +329,6 @@ namespace OnlyTools.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TipCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Kitchen Renovations"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Bathroom Renovations"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Flooring Solutions"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Interior Painting"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Exterior Upgrades"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Plumbing Fixes"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Electrical Repairs"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "HVAC Maintenance"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Foundation and Structural Repairs"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "DIY Home Improvement"
-                        });
                 });
 
             modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.Tool", b =>
@@ -465,44 +413,7 @@ namespace OnlyTools.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Power Tools"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Hand Tools"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Gardening Tools"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Woodworking Tools"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Measuring Tools"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Masonry Tool"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Other Tools"
-                        });
+                    b.ToTable("ToolCategories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

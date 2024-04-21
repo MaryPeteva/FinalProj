@@ -17,7 +17,7 @@ namespace OnlyTools.Core.Services
 
         public async Task AddNewToolAsync(ToolUploadModel tool)
         {
-            ToolCategory cat = await context.Categories.FindAsync(tool.CategoryId);
+            ToolCategory cat = await context.ToolCategories.FindAsync(tool.CategoryId);
             var newTool = new Tool()
             {
                 Name = tool.Name,
@@ -134,7 +134,7 @@ namespace OnlyTools.Core.Services
         public async Task<ToolDetailsModel> GetSpecificToolByIdAsync(int id)
         {
             Tool tool = await context.Tools.FindAsync(id);
-            ToolCategory cat = await context.Categories.FindAsync(tool.CategoryId);
+            ToolCategory cat = await context.ToolCategories.FindAsync(tool.CategoryId);
 
             if (tool == null)
             {
@@ -175,7 +175,7 @@ namespace OnlyTools.Core.Services
         public async Task UpdateToolAsync(int id, ToolUploadModel tool)
         {
             Tool t = await context.Tools.FindAsync(id);
-            ToolCategory cat = await context.Categories.FindAsync(tool.CategoryId);
+            ToolCategory cat = await context.ToolCategories.FindAsync(tool.CategoryId);
             t.Name = tool.Name;
             t.Description = tool.Description;
             t.RentPrice = tool.RentPrice;

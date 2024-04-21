@@ -1,33 +1,27 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using OnlyTools.Core.Contracts;
-using OnlyTools.Core.Services;
-using OnlyTools.Infrastructure.Data;
-using OnlyTools.Infrastructure.Data.IdentityModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
+using OnlyTools.ModelBinders;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<OnlyToolsDbContext>(options =>
-    options.UseSqlServer(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddApplicationDbContext(builder.Configuration);
+builder.Services.AddApplicationIdentity(builder.Configuration);
+builder.Services.AddApplicationServices();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+})
+    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<OnlyToolsDbContext>();
-builder.Services.AddControllersWithViews();
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/User/Login";
     options.LogoutPath = "/User/Logout";
 });
-builder.Services.AddScoped<IToolServices, ToolServices>();
-builder.Services.AddScoped<ITipServices, TipServices>();
-builder.Services.AddScoped<ICategoriesServices, CategoriesServices>();
-
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

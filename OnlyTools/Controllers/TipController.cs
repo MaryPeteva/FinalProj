@@ -76,5 +76,16 @@ namespace OnlyTools.Controllers
             return RedirectToAction(nameof(All));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Like(int id) 
+        {
+            await Console.Out.WriteLineAsync("IN LIKE!");
+            Guid myId = GetUserId();
+            await Console.Out.WriteLineAsync("TOOK USER ID");
+            await _services.LikeTipAsync(myId, id);
+            await Console.Out.WriteLineAsync("LIKE RETURNED");
+            return View();
+        }
+
     }
 }

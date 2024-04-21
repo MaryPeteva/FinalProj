@@ -1,23 +1,26 @@
-﻿using OnlyTools.Infrastructure.Data.IdentityModels;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using OnlyTools.Infrastructure.Data.IdentityModels;
 using OnlyTools.Infrastructure.Data.Models;
-using OnlyTools.Infrastructure.Data.Utils.ValidationsConstants;
-using System.Xml.Linq;
+using OnlyTools.Infrastructure.Data.Seed;
+using OnlyTools.Infrastructure.Data.Seed.Configuration;
 
 namespace OnlyTools.Infrastructure.Data
 {
     public class OnlyToolsDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
-        public OnlyToolsDbContext(DbContextOptions<OnlyToolsDbContext> options)
+        private readonly OnlyToolsSeeder _seeder;
+
+        public OnlyToolsDbContext(DbContextOptions<OnlyToolsDbContext> options, OnlyToolsSeeder seeder)
             : base(options)
         {
+            _seeder = seeder;
         }
         public DbSet<Tool> Tools { get; set; } = null!;
         public DbSet<Tip> TipsAndTricks { get; set; } = null!;
         public DbSet<JobListing> JobListings { get; set; } = null!;
-        public DbSet<ToolCategory> Categories { get; set; } = null!;
+        public DbSet<ToolCategory> ToolCategories { get; set; } = null!;
         public DbSet<Like> Likes { get; set; } = null!;
         public DbSet<TipCategory> TipCategories { get; set; } = null!;
 
