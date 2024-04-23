@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using OnlyTools.Core.Contracts;
 using OnlyTools.Core.Services;
@@ -21,7 +20,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IPaginationServices, PaginationService>();
             services.AddScoped<ILikeServices, LikeService>();
             services.AddScoped <IJobListingServices, JobListingServices>();
-
 
             return services;
         }

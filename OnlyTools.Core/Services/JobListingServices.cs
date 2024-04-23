@@ -57,6 +57,7 @@ namespace OnlyTools.Core.Services
                         Id = j.CategoryId,
                         Name = j.Category.Name
                     },
+                    CategoryId = j.CategoryId,
                     Posted = j.Posted,
                     PosterId = j.PosterId,
                     Poster = j.Poster
@@ -79,6 +80,7 @@ namespace OnlyTools.Core.Services
                         Id = j.CategoryId,
                         Name = j.Category.Name
                     },
+                    CategoryId = j.CategoryId,
                     Posted = j.Posted,
                     PosterId = j.PosterId,
                     Poster = j.Poster

@@ -14,7 +14,15 @@
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
-
+<!-- Dropdown for filtering -->
+<label for="category">Filter by Category:</label>
+<select id="category">
+    <option value="">All</option>
+    @foreach (var category in ViewBag.Categories)
+    {
+        <option value="@category.Id" selected="@((ViewData["CategoryId"]?.ToString() == category.Id.ToString()) ? "selected" : null)">@category.Name</option>
+    }
+</select>
 <div class="text-center row">
     @if (!Model.Any())
     {
@@ -46,8 +54,19 @@
 </div>
 
 @section Scripts {
+    <script>
+        document.getElementById('category').addEventListener('change', function () {
+            var categoryId = this.value;
+            // Construct the URL with the selected category
+            var url = '@Url.Action("All", "Tip")' + '?categoryId=' + categoryId;
+            // Navigate to the constructed URL
+            window.location.href = url;
+        });
+    </script>
+
     <partial name="_ValidationScriptsPartial" />
 }
+
 
 @functions {
     // Helper function to get the first couple of sentences from content

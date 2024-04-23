@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using static OnlyTools.Infrastructure.Data.Utils.ValidationsConstants.CategoryValidationConstants;
 namespace OnlyTools.Infrastructure.Data.Models
 {
-    public class TipCategory
+    public class TipCategory:Category
     {
         [Key]
         [Comment("unique integer category identifier")]

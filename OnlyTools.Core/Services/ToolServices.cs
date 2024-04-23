@@ -82,10 +82,12 @@ namespace OnlyTools.Core.Services
                     OwnerID = t.OwnerID,
                     RentPrice = t.RentPrice,
                     ToolPicture = t.ToolPicture,
-                    Category = new CategoryModel() {
+                    Category = new CategoryModel()
+                    {
                         Id = t.CategoryId,
                         Name = t.Category.Name
-                    }
+                    },
+                    CategoryId = t.CategoryId,
                 })
                 .AsNoTracking()
                 .ToListAsync();
@@ -106,7 +108,8 @@ namespace OnlyTools.Core.Services
                    {
                        Id = t.CategoryId,
                        Name = t.Category.Name
-                   }
+                   },
+                   CategoryId = t.CategoryId
                })
                .AsNoTracking()
                .ToListAsync();
@@ -127,7 +130,8 @@ namespace OnlyTools.Core.Services
                     {
                         Id = t.CategoryId,
                         Name = t.Category.Name
-                    }
+                    },
+                    CategoryId = t.CategoryId,
                 })
                 .AsNoTracking()
                 .ToListAsync();

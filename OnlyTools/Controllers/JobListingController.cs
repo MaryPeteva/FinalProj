@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlyTools.Core.Contracts;
 using OnlyTools.Core.Models.JobListing;
+using OnlyTools.Infrastructure.Data.Models;
 
 namespace OnlyTools.Controllers
 {
@@ -17,16 +18,20 @@ namespace OnlyTools.Controllers
 
         }
 
-        public async Task<IActionResult> All(int page = 1, int pageSize = 5)
+        public async Task<IActionResult> All(int page = 1, int pageSize = 5, int? categoryId = null)
         {
             var jobs = await _services.GetAllJobListingsAsync();
+            if (categoryId != null && categoryId > 0)
+            {
+                jobs = jobs.Where(t => t.CategoryId == categoryId);
+            }
             var (paginatedJobs, totalPages, hasPreviousPage, hasNextPage) = await Paginate(jobs, page, pageSize);
 
             ViewBag.PageIndex = page;
             ViewBag.TotalPages = totalPages;
             ViewBag.HasPreviousPage = hasPreviousPage;
             ViewBag.HasNextPage = hasNextPage;
-
+            ViewBag.Categories = await _categoryServices.GetJobsCategoriesAsync();
             return View(paginatedJobs);
         }
 
@@ -93,16 +98,21 @@ namespace OnlyTools.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> MyJobs(int page = 1, int pageSize = 5)
+        public async Task<IActionResult> MyJobs(int page = 1, int pageSize = 5, int? categoryId = null)
         {
             Guid myId = GetUserId();
             var job = await _services.GetMyJobsAsync(myId);
+            if (categoryId != null && categoryId > 0)
+            {
+                job = job.Where(t => t.CategoryId == categoryId);
+            }
             var (paginatedJobs, totalPages, hasPreviousPage, hasNextPage) = await Paginate(job, page, pageSize);
 
             ViewBag.PageIndex = page;
             ViewBag.TotalPages = totalPages;
             ViewBag.HasPreviousPage = hasPreviousPage;
             ViewBag.HasNextPage = hasNextPage;
+            ViewBag.Categories = await _categoryServices.GetTipCategoriesAsync();
 
             return View(paginatedJobs);
         }

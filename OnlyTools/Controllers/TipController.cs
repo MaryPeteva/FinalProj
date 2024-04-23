@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlyTools.Core.Contracts;
 using OnlyTools.Core.Models.Tips;
+using OnlyTools.Core.Services;
+using OnlyTools.Infrastructure.Data.Models;
 
 namespace OnlyTools.Controllers
 {
@@ -13,18 +15,26 @@ namespace OnlyTools.Controllers
             _services = services;
             _categoryServices = categoryServices;
         }
-        public async Task<IActionResult> All(int page = 1, int pageSize = 5)
+        public async Task<IActionResult> All(int page = 1, int pageSize = 5, int? categoryId = null)
         {
+            ViewData["CategoryId"] = categoryId;
             var tips = await _services.GetAllTipsAsync();
+            if (categoryId != null && categoryId > 0)
+            {
+                tips = tips.Where(t => t.CategoryId == categoryId);
+            }
+
             var (paginatedTips, totalPages, hasPreviousPage, hasNextPage) = await Paginate(tips, page, pageSize);
 
             ViewBag.PageIndex = page;
             ViewBag.TotalPages = totalPages;
             ViewBag.HasPreviousPage = hasPreviousPage;
             ViewBag.HasNextPage = hasNextPage;
-
+            ViewBag.Categories = await _categoryServices.GetTipCategoriesAsync();
+            
             return View(paginatedTips);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> AddTip()
@@ -82,17 +92,22 @@ namespace OnlyTools.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> MyTips(int page = 1, int pageSize = 5)
+        public async Task<IActionResult> MyTips(int page = 1, int pageSize = 5, int? categoryId = null)
         {
+
             Guid myId = GetUserId();
             var tips = await _services.GetMyTipsAsync(myId);
+            if (categoryId != null && categoryId > 0)
+            {
+                tips = tips.Where(t => t.CategoryId == categoryId);
+            }
             var (paginatedTips, totalPages, hasPreviousPage, hasNextPage) = await Paginate(tips, page, pageSize);
 
             ViewBag.PageIndex = page;
             ViewBag.TotalPages = totalPages;
             ViewBag.HasPreviousPage = hasPreviousPage;
             ViewBag.HasNextPage = hasNextPage;
-
+            ViewBag.Categories = await _categoryServices.GetTipCategoriesAsync();
             return View(paginatedTips);
         }
 

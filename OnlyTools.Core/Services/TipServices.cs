@@ -117,6 +117,27 @@ namespace OnlyTools.Core.Services
             return Dtip;
         }
 
+        public async Task<IEnumerable<TipsAllModel>> GetTipsByCategoryIdAsync(int categoryId)
+        {
+            return await context.TipsAndTricks.Select(t => new TipsAllModel()
+            {
+                Id = t.Id,
+                Title = t.Title,
+                Content = t.Content,
+                AuthorId = t.AuthorId,
+                Author = t.Author,
+                CategoryId = t.CategoryId,
+                Category = new CategoryModel()
+                {
+                    Id = t.CategoryId,
+                    Name = t.Category.Name
+                }
+            })
+                 .Where(t => t.CategoryId == categoryId)
+                 .AsNoTracking()
+                 .ToListAsync();
+        }
+
         public async Task LikeTipAsync(Guid myId, int id)
         {
             await Console.Out.WriteLineAsync("IN LIKE SERVICE");

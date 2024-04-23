@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlyTools.Controllers;
 using OnlyTools.Core.Contracts;
 using OnlyTools.Core.Models.Tool;
+using OnlyTools.Infrastructure.Data.Models;
 
 namespace OnlyTools.Web.Controllers
 {
@@ -16,16 +17,22 @@ namespace OnlyTools.Web.Controllers
             _services = services;
             _categoryServices = categoryServices;
         }
-        public async Task<IActionResult> All(int page = 1, int pageSize = 5)
+        public async Task<IActionResult> All(int page = 1, int pageSize = 5, int? categoryId = null)
         {
             var tools = await _services.GetAllToolsAsync();
+            if (categoryId != null && categoryId > 0)
+            {
+                tools = tools.Where(t => t.CategoryId == categoryId);
+                int v = tools.Count();
+                await Console.Out.WriteLineAsync(v.ToString());
+            }
             var (paginatedTools, totalPages, hasPreviousPage, hasNextPage) = await Paginate(tools, page, pageSize);
 
             ViewBag.PageIndex = page;
             ViewBag.TotalPages = totalPages;
             ViewBag.HasPreviousPage = hasPreviousPage;
             ViewBag.HasNextPage = hasNextPage;
-
+            ViewBag.Categories = await _categoryServices.GetToolCategoriesAsync();
             return View(paginatedTools);
         }
 
@@ -106,32 +113,41 @@ namespace OnlyTools.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> MyTools(int page = 1, int pageSize = 5)
+        public async Task<IActionResult> MyTools(int page = 1, int pageSize = 5, int? categoryId = null)
         {
             Guid myId = GetUserId();
             var tools = await _services.GetMyToolsAsync(myId);
+            if (categoryId != null && categoryId > 0)
+            {
+                tools = tools.Where(t => t.CategoryId == categoryId);
+            }
             var (paginatedTools, totalPages, hasPreviousPage, hasNextPage) = await Paginate(tools, page, pageSize);
 
             ViewBag.PageIndex = page;
             ViewBag.TotalPages = totalPages;
             ViewBag.HasPreviousPage = hasPreviousPage;
             ViewBag.HasNextPage = hasNextPage;
+            ViewBag.Categories = await _categoryServices.GetToolCategoriesAsync();
 
             return View(paginatedTools);
         }
 
         [HttpGet]
-        public async Task<IActionResult> MyRentedTools(int page = 1, int pageSize = 5)
+        public async Task<IActionResult> MyRentedTools(int page = 1, int pageSize = 5, int? categoryId = null)
         {
             Guid myId = GetUserId();
             var tools = await _services.GetMyRentedToolsAsync(myId);
+            if (categoryId != null && categoryId > 0)
+            {
+                tools = tools.Where(t => t.CategoryId == categoryId);
+            }
             var (paginatedTools, totalPages, hasPreviousPage, hasNextPage) = await Paginate(tools, page, pageSize);
 
             ViewBag.PageIndex = page;
             ViewBag.TotalPages = totalPages;
             ViewBag.HasPreviousPage = hasPreviousPage;
             ViewBag.HasNextPage = hasNextPage;
-
+            ViewBag.Categories = await _categoryServices.GetToolCategoriesAsync();
             return View(paginatedTools);
         }
 

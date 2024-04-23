@@ -4,7 +4,7 @@ using static OnlyTools.Infrastructure.Data.Utils.ValidationsConstants.CategoryVa
 
 namespace OnlyTools.Infrastructure.Data.Models
 {
-    public class JobListingCategory
+    public class JobListingCategory:Category
     {
         [Key]
         [Comment("unique integer category identifier")]
