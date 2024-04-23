@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using OnlyTools.Controllers;
 using OnlyTools.Core.Contracts;
 using OnlyTools.Core.Models.Tool;
+using OnlyTools.Infrastructure.Data.Models;
 using OnlyTools.Models;
 using System.Drawing.Printing;
 
@@ -48,7 +49,7 @@ namespace OnlyTools.Web.Controllers
             Guid userId = GetUserId();
             tool.OwnerID = userId;
             await _services.AddNewToolAsync(tool);
-            return RedirectToAction(nameof(All));
+            return RedirectToAction("Details", "Tool", new { id = tool.Id });
         }
 
         [HttpGet]
@@ -84,7 +85,7 @@ namespace OnlyTools.Web.Controllers
         public async Task<IActionResult> Edit(int id, ToolUploadModel tool)
         {
             await _services.UpdateToolAsync(id, tool);
-            return RedirectToAction(nameof(All));
+            return RedirectToAction("Details", "Tool", new { id = tool.Id });
         }
 
         [HttpPost]
@@ -105,7 +106,7 @@ namespace OnlyTools.Web.Controllers
                 return BadRequest();
             }
             await _services.RentToolAsync(tool.Id, userId);
-            return RedirectToAction(nameof(All));
+            return RedirectToAction("Details", "Tool", new { id = tool.Id });
 
         }
 

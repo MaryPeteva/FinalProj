@@ -38,15 +38,6 @@
                 </div>
 
                 <a asp-controller="Tool" asp-action="Details" asp-route-id="@tool.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">View Details</a>
-                @if (User.Identity.IsAuthenticated && tool.OwnerID.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier))
-                {
-                    <a asp-controller="Tool" asp-action="Edit" asp-route-id="@tool.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
-                    <form class="mt-2" asp-controller="Tool" asp-action="Delete" asp-route-id="@tool.Id">
-                        <div class="d-grid gap-2">
-                            <input type="submit" value="Delete" class="btn btn-danger mb-2" />
-                        </div>
-                    </form>
-                }
             </div>
         }
     }

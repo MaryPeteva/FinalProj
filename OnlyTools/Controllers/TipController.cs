@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Build.Evaluation;
 using OnlyTools.Core.Contracts;
 using OnlyTools.Core.Models.Tips;
-using OnlyTools.Core.Models.Tool;
-using OnlyTools.Infrastructure.Data.Models;
-using System.Drawing.Printing;
 
 namespace OnlyTools.Controllers
 {
@@ -45,7 +40,7 @@ namespace OnlyTools.Controllers
             Guid userId = GetUserId();
             tip.AuthorId = userId;
             await _services.AddNewTipAsync(tip);
-            return RedirectToAction(nameof(All));
+            return RedirectToAction("Details", "Tip", new { id = tip.Id });
         }
 
         [HttpGet]
@@ -57,7 +52,6 @@ namespace OnlyTools.Controllers
             {
                 return NotFound();
             }
-            await Console.Out.WriteLineAsync(string.Join(' ',tipDetails.Likes.ToString()));
             return View(tipDetails);
         }
 
@@ -77,7 +71,7 @@ namespace OnlyTools.Controllers
         public async Task<IActionResult> Edit(int id, TipPostModel tip)
         {
             await _services.UpdateTipAsync(id, tip);
-            return RedirectToAction(nameof(All));
+            return RedirectToAction("Details", "Tip", new { id = tip.Id });
         }
 
         [HttpPost]

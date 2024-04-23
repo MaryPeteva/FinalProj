@@ -1,11 +1,10 @@
-﻿using OnlyTools.Infrastructure.Data.IdentityModels;
-using OnlyTools.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using OnlyTools.Core.Contracts;
 using OnlyTools.Core.Models.User;
+using OnlyTools.Infrastructure.Data.IdentityModels;
+using OnlyTools.Models;
 
 namespace OnlyTools.Controllers
 {

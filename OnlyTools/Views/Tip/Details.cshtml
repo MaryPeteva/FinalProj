@@ -34,6 +34,15 @@
                             </form>
                         </div>
                     }
+                    @if (User.Identity.IsAuthenticated && Model.AuthorId.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier))
+                    {
+                        <a asp-controller="Tip" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+                        <form class="mt-2" asp-controller="Tip" asp-action="Delete" asp-route-id="@Model.Id">
+                            <div class="d-grid gap-2">
+                                <input type="submit" value="Delete post" class="btn btn-danger mb-2" />
+                            </div>
+                        </form>
+                    }
                 </div>
             </div>
         </div>
