@@ -64,6 +64,27 @@ namespace OnlyTools.Core.Services
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<TipsAllModel>> GetMyTipsAsync(Guid myId)
+        {
+            return await context.TipsAndTricks.Select(t => new TipsAllModel()
+            {
+                Id = t.Id,
+                Title = t.Title,
+                Content = t.Content,
+                AuthorId = t.AuthorId,
+                Author = t.Author,
+                CategoryId = t.CategoryId,
+                Category = new CategoryModel()
+                {
+                    Id = t.CategoryId,
+                    Name = t.Category.Name
+                }
+            })
+                .Where(t=>t.AuthorId == myId)
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
         public async Task<TipsDetailedModel> GetSpecificTipByIdAsync(int id)
         {
             var tip = await context.TipsAndTricks.FindAsync(id);
@@ -110,7 +131,6 @@ namespace OnlyTools.Core.Services
                 UserId = user.Id
             };
             context.Likes.AddAsync(like);
-            user.LikedTips.Add(like);
             tip.LikedBy.Add(like);
             context.SaveChanges();
 

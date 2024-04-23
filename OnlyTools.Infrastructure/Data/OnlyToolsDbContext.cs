@@ -48,12 +48,6 @@ namespace OnlyTools.Infrastructure.Data
                         .HasKey(t => new { t.UserId, t.TipId });
 
             modelBuilder.Entity<Like>()
-                        .HasOne(tl => tl.User)
-                        .WithMany(u => u.LikedTips)
-                        .HasForeignKey(tl => tl.UserId)
-                        .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Like>()
                         .HasOne(tl => tl.Tip)
                         .WithMany(t => t.LikedBy)
                         .HasForeignKey(tl => tl.TipId)

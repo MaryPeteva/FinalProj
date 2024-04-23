@@ -1,6 +1,7 @@
-﻿@model List<ToolModel>
+﻿@model List<TipsAllModel>
+@inject IPaginationService PaginationService
 @{
-    ViewBag.Title = "My Rented Tools";
+    ViewBag.Title = "My shared tips";
 }
 
 <style>
@@ -14,39 +15,61 @@
 <hr />
 
 <div class="text-center row">
-    @if (Model.Count == 0)
+    @if (!Model.Any())
     {
-        <h2>You have not rented any tools</h2>
+        <h2>You have not shared any tips yet!</h2>
     }
     else
     {
-        @foreach (var tool in Model)
+        @foreach (var tip in Model)
         {
-            <div class="card col-4" style="width: 20rem; ">
-                @if (tool.ToolPicture != null)
-                {
-
-                    string imageBase64 = Convert.ToBase64String(tool.ToolPicture);
-                    string imageSrc = $"data:image/jpeg;base64,{imageBase64}";
-                    <img src="@imageSrc" class="card-img-top" alt="Tool Image">
-                }
+            <div class="card col-4" style="width: 20rem;">
                 <div class="card-body">
-                    <h5 class="card-title mt-1">@tool.Name</h5>
-                    <p class="mb-0"><span class="fw-bold">Name: </span>@tool.Name</p>
-                    <p class="mb-0"><span class="fw-bold">Rent price: </span>@tool.RentPrice</p>
+                    <h5 class="card-title mt-1">@tip.Title</h5>
+                    <p class="mb-0"><span class="fw-bold">Author: </span>@tip.Author.UserName</p>
+                    <br />
+                    <p class="card-text">@GetFirstSentences(tip.Content)</p>
                 </div>
 
-                <a asp-controller="Tool" asp-action="Details" asp-route-id="@tool.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">View Details</a>
-                <form class="ml-2" asp-controller="Tool"
-                      asp-action="Return" asp-route-id="@tool.Id" method="post">
-                    <input class="btn btn-primary" type="submit" value="Return tool" />
-                </form>
-
+                <a asp-controller="Tip" asp-action="Details" asp-route-id="@tip.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Read More</a>
+                @if (User.Identity.IsAuthenticated && tip.AuthorId.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier))
+                {
+                    <a asp-controller="Tip" asp-action="Edit" asp-route-id="@tip.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+                    <form class="mt-2" asp-controller="Tip" asp-action="Delete" asp-route-id="@tip.Id">
+                        <div class="d-grid gap-2">
+                            <input type="submit" value="Delete post" class="btn btn-danger mb-2" />
+                        </div>
+                    </form>
+                }
             </div>
         }
     }
+    @{
+        var paginationModel = PaginationService.CreatePaginationModel(ViewBag.PageIndex, ViewBag.TotalPages, ViewBag.HasPreviousPage, ViewBag.HasNextPage, "All", "Tip", new { });
+    }
+
+    @await Html.PartialAsync("_Pagination", (object)paginationModel)
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+}
+
+@functions {
+    // Helper function to get the first couple of sentences from content
+    public string GetFirstSentences(string content)
+    {
+        if (string.IsNullOrWhiteSpace(content))
+        {
+            return string.Empty;
+        }
+
+        // Split content into sentences
+        var sentences = content.Split(new[] { '.', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
+
+        // Get the first 2 of sentences
+        var firstSentences = string.Join(". ", sentences.Take(2));
+
+        return firstSentences;
+    }
 }

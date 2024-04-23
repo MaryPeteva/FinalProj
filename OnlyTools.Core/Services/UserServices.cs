@@ -27,11 +27,7 @@ namespace OnlyTools.Core.Services
                 Password = user.PasswordHash,
                 Email = user.Email,
                 ProfilePicture = user.ProfilePicture,
-                PhoneNumber = user.PhoneNumber,
-                OwnedTools = (IEnumerable<Models.Tool.ToolModel>)user.OwnedTools,
-                RentedTools = (IEnumerable<Models.Tool.ToolModel>)user.RentedTools,
-                PostedTips = (IEnumerable<Models.Tips.TipsAllModel>)user.PostedTips,
-                LikedTips = (IEnumerable<Models.Like.LikeModel>)user.LikedTips,
+                PhoneNumber = user.PhoneNumber
             };
             return profile;
         }

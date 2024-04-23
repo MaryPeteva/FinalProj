@@ -1,4 +1,5 @@
 ﻿@model List<ToolModel>
+@inject IPaginationService PaginationService
 @{
     ViewBag.Title = "My Rented Tools";
 }
@@ -44,6 +45,9 @@
 
             </div>
         }
+
+        var paginationModel = PaginationService.CreatePaginationModel(ViewBag.PageIndex, ViewBag.TotalPages, ViewBag.HasPreviousPage, ViewBag.HasNextPage, "All", "Tool", new { });
+        await Html.PartialAsync("_Pagination", (object)paginationModel);
     }
 </div>
 

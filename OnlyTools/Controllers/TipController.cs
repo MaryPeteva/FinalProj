@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Build.Evaluation;
 using OnlyTools.Core.Contracts;
 using OnlyTools.Core.Models.Tips;
 using OnlyTools.Core.Models.Tool;
 using OnlyTools.Infrastructure.Data.Models;
+using System.Drawing.Printing;
 
 namespace OnlyTools.Controllers
 {
@@ -18,24 +21,14 @@ namespace OnlyTools.Controllers
         public async Task<IActionResult> All(int page = 1, int pageSize = 5)
         {
             var tips = await _services.GetAllTipsAsync();
-            int skip = (page - 1) * pageSize;
-            int totalItems = tips.Count();
-            tips = tips
-                .Skip(skip)
-                .Take(pageSize)
-                .ToList();
-
-
-            int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
-            bool hasPreviousPage = page > 1;
-            bool hasNextPage = page < totalPages;
+            var (paginatedTips, totalPages, hasPreviousPage, hasNextPage) = await Paginate(tips, page, pageSize);
 
             ViewBag.PageIndex = page;
             ViewBag.TotalPages = totalPages;
             ViewBag.HasPreviousPage = hasPreviousPage;
             ViewBag.HasNextPage = hasNextPage;
 
-            return View(tips);
+            return View(paginatedTips);
         }
 
         [HttpGet]
@@ -102,6 +95,21 @@ namespace OnlyTools.Controllers
             await _services.LikeTipAsync(myId, id);
             await Console.Out.WriteLineAsync("LIKE RETURNED");
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> MyTips(int page = 1, int pageSize = 5)
+        {
+            Guid myId = GetUserId();
+            var tips = await _services.GetMyTipsAsync(myId);
+            var (paginatedTips, totalPages, hasPreviousPage, hasNextPage) = await Paginate(tips, page, pageSize);
+
+            ViewBag.PageIndex = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.HasPreviousPage = hasPreviousPage;
+            ViewBag.HasNextPage = hasNextPage;
+
+            return View(paginatedTips);
         }
 
     }
