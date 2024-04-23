@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.EntityFrameworkCore;
 using OnlyTools.Core.Contracts;
 using OnlyTools.Core.Models.Category;
+using OnlyTools.Core.Models.Like;
 using OnlyTools.Core.Models.Tips;
 using OnlyTools.Infrastructure.Data;
 using OnlyTools.Infrastructure.Data.IdentityModels;
@@ -8,7 +10,7 @@ using OnlyTools.Infrastructure.Data.Models;
 
 namespace OnlyTools.Core.Services
 {
-    public class TipServices:ITipServices
+    public class TipServices : ITipServices
     {
         private readonly OnlyToolsDbContext context;
 
@@ -80,7 +82,7 @@ namespace OnlyTools.Core.Services
                     Name = t.Category.Name
                 }
             })
-                .Where(t=>t.AuthorId == myId)
+                .Where(t => t.AuthorId == myId)
                 .AsNoTracking()
                 .ToListAsync();
         }
@@ -89,21 +91,28 @@ namespace OnlyTools.Core.Services
         {
             var tip = await context.TipsAndTricks.FindAsync(id);
             TipCategory cat = await context.TipCategories.FindAsync(tip.CategoryId);
-            TipsDetailedModel Dtip = new TipsDetailedModel() 
+            TipsDetailedModel Dtip = new TipsDetailedModel()
             {
                 Id = tip.Id,
                 Title = tip.Title,
                 Content = tip.Content,
                 PublishedOn = tip.PubllishedOn,
-                AuthorId= tip.AuthorId,
+                AuthorId = tip.AuthorId,
                 Author = tip.Author,
-                CategoryId= tip.CategoryId,
-                Category = new CategoryModel() {
+                CategoryId = tip.CategoryId,
+                Category = new CategoryModel()
+                {
                     Id = cat.Id,
                     Name = cat.Name
                 }
             };
-
+            ICollection<Like> likes = await context.Likes
+                                                    .Where(like => like.TipId == id)
+                                                    .ToListAsync();
+            foreach (var like in likes)
+            {
+                Dtip.Likes.Add(new LikeModel(like.UserId, like.TipId));
+            }
             return Dtip;
         }
 
@@ -111,7 +120,7 @@ namespace OnlyTools.Core.Services
         {
             await Console.Out.WriteLineAsync("IN LIKE SERVICE");
             ApplicationUser user = await context.Users.FindAsync(myId);
-            if (user == null) 
+            if (user == null)
             {
                 throw new Exception($"No user with id {myId} found!");
             }

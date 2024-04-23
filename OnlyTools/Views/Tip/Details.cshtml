@@ -1,4 +1,5 @@
-﻿@model TipsDetailedModel
+﻿@using OnlyTools.Core.Models.Like
+@model TipsDetailedModel
 
 @{
     ViewBag.Title = "Article Details";
@@ -22,10 +23,13 @@
                     <div class="article-content">
                         <p>@Model.Content</p>
                     </div>
-                    @if (Model.AuthorId.ToString("D") != User.FindFirstValue(ClaimTypes.NameIdentifier))
-                    {
+                    @if (Model.AuthorId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)) && !Model.Likes.Any(l => l.UserId == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)) && l.TipId == Model.Id))
+                            {
+                                Console.WriteLine(Model.Likes.ToString());
+                        Console.WriteLine(Model.Likes.Any(l => l.UserId == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)) && l.TipId == Model.Id));
                         <div class="text-center mt-4">
-                            <form asp-controller="Tip" asp-action="Like" asp-route-id="@Model.Id" method="post">
+                            <form asp-controller="Like" asp-action="LikeTip" method="post">
+                                <input type="hidden" name="tipId" value="@Model.Id" />
                                 <button class="btn btn-primary" type="submit">Like</button>
                             </form>
                         </div>

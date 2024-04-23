@@ -57,6 +57,7 @@ namespace OnlyTools.Controllers
             {
                 return NotFound();
             }
+            await Console.Out.WriteLineAsync(string.Join(' ',tipDetails.Likes.ToString()));
             return View(tipDetails);
         }
 
@@ -84,17 +85,6 @@ namespace OnlyTools.Controllers
         {
             await _services.DeleteTipAsync(id);
             return RedirectToAction(nameof(All));
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Like(int id) 
-        {
-            await Console.Out.WriteLineAsync("IN LIKE!");
-            Guid myId = GetUserId();
-            await Console.Out.WriteLineAsync("TOOK USER ID");
-            await _services.LikeTipAsync(myId, id);
-            await Console.Out.WriteLineAsync("LIKE RETURNED");
-            return View();
         }
 
         [HttpGet]

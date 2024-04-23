@@ -284,9 +284,6 @@ namespace OnlyTools.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<Guid?>("ApplicationUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("AuthorId")
                         .HasColumnType("uniqueidentifier");
 
@@ -308,8 +305,6 @@ namespace OnlyTools.Infrastructure.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("AuthorId");
 
@@ -398,12 +393,6 @@ namespace OnlyTools.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<Guid?>("ApplicationUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ApplicationUserId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int")
                         .HasComment("Category unique identifier, integer representation");
@@ -441,10 +430,6 @@ namespace OnlyTools.Infrastructure.Migrations
                         .HasComment("Picture of the tool, stored as a byte array, optional");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("ApplicationUserId1");
 
                     b.HasIndex("CategoryId");
 
@@ -585,7 +570,7 @@ namespace OnlyTools.Infrastructure.Migrations
                     b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", "User")
                         .WithMany("LikedTips")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Tip");
@@ -595,10 +580,6 @@ namespace OnlyTools.Infrastructure.Migrations
 
             modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.Tip", b =>
                 {
-                    b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", null)
-                        .WithMany("PostedTips")
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId")
@@ -618,14 +599,6 @@ namespace OnlyTools.Infrastructure.Migrations
 
             modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.Tool", b =>
                 {
-                    b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", null)
-                        .WithMany("OwnedTools")
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", null)
-                        .WithMany("RentedTools")
-                        .HasForeignKey("ApplicationUserId1");
-
                     b.HasOne("OnlyTools.Infrastructure.Data.Models.ToolCategory", "Category")
                         .WithMany("Tools")
                         .HasForeignKey("CategoryId")
@@ -652,12 +625,6 @@ namespace OnlyTools.Infrastructure.Migrations
             modelBuilder.Entity("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", b =>
                 {
                     b.Navigation("LikedTips");
-
-                    b.Navigation("OwnedTools");
-
-                    b.Navigation("PostedTips");
-
-                    b.Navigation("RentedTools");
                 });
 
             modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.Tip", b =>

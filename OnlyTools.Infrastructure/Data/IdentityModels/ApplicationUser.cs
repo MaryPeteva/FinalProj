@@ -9,5 +9,6 @@ namespace OnlyTools.Infrastructure.Data.IdentityModels
     {
         [Comment("profile picture, stored as a byte array, optional")]
         public byte[]? ProfilePicture { get; set; }
+        public IList<Like> LikedTips { get; internal set; }
     }
 }

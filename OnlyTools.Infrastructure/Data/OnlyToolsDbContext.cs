@@ -45,13 +45,21 @@ namespace OnlyTools.Infrastructure.Data
                         .HasForeignKey(t => t.AuthorId);
 
             modelBuilder.Entity<Like>()
-                        .HasKey(t => new { t.UserId, t.TipId });
+                .HasKey(l => new { l.UserId, l.TipId });
 
             modelBuilder.Entity<Like>()
-                        .HasOne(tl => tl.Tip)
-                        .WithMany(t => t.LikedBy)
-                        .HasForeignKey(tl => tl.TipId)
-                        .OnDelete(DeleteBehavior.Cascade);
+                .HasOne(l => l.User)
+                .WithMany(u => u.LikedTips)
+                .HasForeignKey(l => l.UserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Like>()
+                .HasOne(l => l.Tip)
+                .WithMany(t => t.LikedBy)
+                .HasForeignKey(l => l.TipId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Entity<JobListing>()

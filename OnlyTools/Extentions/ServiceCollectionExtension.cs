@@ -19,6 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<ICategoriesServices, CategoriesServices>();
             services.AddScoped<IUserServices, UserServices>();
             services.AddScoped<IPaginationService, PaginationService>();
+            services.AddScoped<ILikeService, LikeService>();
 
 
 
