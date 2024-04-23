@@ -2,7 +2,7 @@
 namespace OnlyTools.Core.Contracts
 {
 
-    public interface IPaginationService
+    public interface IPaginationServices
     {
         PaginationModel CreatePaginationModel(int pageIndex, int totalPages, bool hasPreviousPage, bool hasNextPage, string action, string controller, object routeValues);
     }

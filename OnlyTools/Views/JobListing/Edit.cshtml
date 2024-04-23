@@ -1,0 +1,46 @@
+﻿@model JobListingUploadModel
+
+@{
+    ViewBag.Title = "Edit job";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+<div class="row">
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <div class="mb-3">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control" placeholder ="@Model.Title">
+                <span asp-validation-for="Title" class="small text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control" rows="8">@Model.Description</textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" placeholder="@Model.Price">
+                <span asp-validation-for="Price" class="small text-danger"></span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="mb-3">
+                <div class="mb-3">
+                    <label asp-for="@Model.CategoryId" class="form-label-add-edit">Select Category</label>
+                    <select asp-for="@Model.CategoryId" class="form-control" aria-required="true">
+                        <option disabled selected value="">Select Category...</option>
+                        @foreach (var category in Model.Categories)
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Update job</button>
+        </div>
+
+    </form>
+</div>

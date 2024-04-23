@@ -23,6 +23,7 @@ namespace OnlyTools.Infrastructure.Data
         public DbSet<ToolCategory> ToolCategories { get; set; } = null!;
         public DbSet<Like> Likes { get; set; } = null!;
         public DbSet<TipCategory> TipCategories { get; set; } = null!;
+        public DbSet<JobListingCategory> JobListingCategories { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -162,6 +163,33 @@ namespace OnlyTools.Infrastructure.Data
 
                    Id = 10,
                    Name = "DIY Home Improvement"
+               }
+               );
+
+            modelBuilder.Entity<JobListingCategory>()
+               .HasData(new JobListingCategory() { 
+                    Id = 1,
+                    Name = "Electrical"
+               },
+               new JobListingCategory()
+               {
+                   Id = 2,
+                   Name = "Plumbing"
+               },
+               new JobListingCategory()
+               {
+                   Id = 3,
+                   Name = "HVAC Systems:"
+               },
+               new JobListingCategory()
+               {
+                   Id = 4,
+                   Name = "Interior Renovations"
+               },
+               new JobListingCategory()
+               {
+                   Id = 5,
+                   Name = "Other"
                }
                );
         }

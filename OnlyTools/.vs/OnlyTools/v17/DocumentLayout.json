@@ -3,40 +3,47 @@
   "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools\\views\\tip\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|solutionrelative:views\\tip\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{B71810B4-9C60-4AC8-8721-B89966F97BEA}|..\\OnlyTools.Core\\OnlyTools.Core.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools.core\\contracts\\ijoblistingservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools\\views\\tip\\all.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|solutionrelative:views\\tip\\all.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{B71810B4-9C60-4AC8-8721-B89966F97BEA}|..\\OnlyTools.Core\\OnlyTools.Core.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools.core\\services\\joblistingservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools\\views\\tool\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|solutionrelative:views\\tool\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools\\controllers\\joblistingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|solutionrelative:controllers\\joblistingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools\\views\\tool\\all.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|solutionrelative:views\\tool\\all.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools\\views\\joblisting\\myjobs.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|solutionrelative:views\\joblisting\\myjobs.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools\\controllers\\toolcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|solutionrelative:controllers\\toolcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B71810B4-9C60-4AC8-8721-B89966F97BEA}|..\\OnlyTools.Core\\OnlyTools.Core.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools.core\\services\\tipservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B71810B4-9C60-4AC8-8721-B89966F97BEA}|..\\OnlyTools.Core\\OnlyTools.Core.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools.core\\services\\likeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools\\controllers\\tipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|solutionrelative:controllers\\tipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools\\controllers\\likecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|solutionrelative:controllers\\likecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools\\views\\joblisting\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|solutionrelative:views\\joblisting\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools\\views\\tool\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|solutionrelative:views\\tool\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{B71810B4-9C60-4AC8-8721-B89966F97BEA}|..\\OnlyTools.Core\\OnlyTools.Core.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools.core\\services\\toolservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools\\views\\tool\\addtool.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|solutionrelative:views\\tool\\addtool.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools\\views\\joblisting\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|solutionrelative:views\\joblisting\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools\\views\\user\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|solutionrelative:views\\user\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|c:\\users\\user\\source\\repos\\finalproj\\onlytools\\views\\joblisting\\all.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D638BAFB-AE1A-4E06-94FD-37F361C6B137}|OnlyTools.csproj|solutionrelative:views\\joblisting\\all.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -51,92 +58,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\Tip\\Details.cshtml",
-              "RelativeDocumentMoniker": "Views\\Tip\\Details.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\Tip\\Details.cshtml",
-              "RelativeToolTip": "Views\\Tip\\Details.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACwAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-23T15:47:18.646Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "All.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\Tip\\All.cshtml",
-              "RelativeDocumentMoniker": "Views\\Tip\\All.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\Tip\\All.cshtml",
-              "RelativeToolTip": "Views\\Tip\\All.cshtml",
-              "ViewState": "AQIAABsAAAAAAAAAAAAAACMAAACQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-23T15:47:05.207Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\Tool\\Details.cshtml",
-              "RelativeDocumentMoniker": "Views\\Tool\\Details.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\Tool\\Details.cshtml",
-              "RelativeToolTip": "Views\\Tool\\Details.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAABdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-23T15:46:07.056Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "All.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\Tool\\All.cshtml",
-              "RelativeDocumentMoniker": "Views\\Tool\\All.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\Tool\\All.cshtml",
-              "RelativeToolTip": "Views\\Tool\\All.cshtml",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAAACcAAACVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-23T15:45:41.4Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "LikeController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Controllers\\LikeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\LikeController.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Controllers\\LikeController.cs",
-              "RelativeToolTip": "Controllers\\LikeController.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAgwBUAAABKAAAA",
+              "Title": "IJobListingServices.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Core\\Contracts\\IJobListingServices.cs",
+              "RelativeDocumentMoniker": "..\\OnlyTools.Core\\Contracts\\IJobListingServices.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Core\\Contracts\\IJobListingServices.cs",
+              "RelativeToolTip": "..\\OnlyTools.Core\\Contracts\\IJobListingServices.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAoAAABIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-23T15:41:25.465Z",
+              "WhenOpened": "2024-04-23T19:25:13.453Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "TipController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Controllers\\TipController.cs",
-              "RelativeDocumentMoniker": "Controllers\\TipController.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Controllers\\TipController.cs",
-              "RelativeToolTip": "Controllers\\TipController.cs",
-              "ViewState": "AQIAAF4AAAAAAAAAAAAYwEkAAAAzAAAA",
+              "Title": "LikeService.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Core\\Services\\LikeService.cs",
+              "RelativeDocumentMoniker": "..\\OnlyTools.Core\\Services\\LikeService.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Core\\Services\\LikeService.cs",
+              "RelativeToolTip": "..\\OnlyTools.Core\\Services\\LikeService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-23T15:40:45.669Z",
+              "WhenOpened": "2024-04-23T19:21:59.601Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\Tool\\Edit.cshtml",
-              "RelativeDocumentMoniker": "Views\\Tool\\Edit.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\Tool\\Edit.cshtml",
-              "RelativeToolTip": "Views\\Tool\\Edit.cshtml",
-              "ViewState": "AQIAADAAAAAAAAAAAAAAABkAAAASAAAA",
+              "DocumentIndex": 3,
+              "Title": "MyJobs.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\JobListing\\MyJobs.cshtml",
+              "RelativeDocumentMoniker": "Views\\JobListing\\MyJobs.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\JobListing\\MyJobs.cshtml",
+              "RelativeToolTip": "Views\\JobListing\\MyJobs.cshtml",
+              "ViewState": "AQIAAB8AAAAAAAAAAAAqwDIAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-23T15:38:54.171Z",
+              "WhenOpened": "2024-04-23T19:17:57.856Z",
               "EditorCaption": ""
             },
             {
@@ -153,28 +108,119 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "AddTool.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\Tool\\AddTool.cshtml",
-              "RelativeDocumentMoniker": "Views\\Tool\\AddTool.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\Tool\\AddTool.cshtml",
-              "RelativeToolTip": "Views\\Tool\\AddTool.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-23T15:39:13.587Z",
+              "DocumentIndex": 4,
+              "Title": "TipServices.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Core\\Services\\TipServices.cs",
+              "RelativeDocumentMoniker": "..\\OnlyTools.Core\\Services\\TipServices.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Core\\Services\\TipServices.cs",
+              "RelativeToolTip": "..\\OnlyTools.Core\\Services\\TipServices.cs",
+              "ViewState": "AQIAAEEAAAAAAAAAAAAIwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T19:09:14.234Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ToolController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Controllers\\ToolController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ToolController.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Controllers\\ToolController.cs",
-              "RelativeToolTip": "Controllers\\ToolController.cs",
-              "ViewState": "AQIAAIQAAAAAAAAAAAAswGwAAABNAAAA",
+              "DocumentIndex": 7,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\JobListing\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\JobListing\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\JobListing\\Edit.cshtml",
+              "RelativeToolTip": "Views\\JobListing\\Edit.cshtml",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-23T19:16:07.1Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\JobListing\\Details.cshtml",
+              "RelativeDocumentMoniker": "Views\\JobListing\\Details.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\JobListing\\Details.cshtml",
+              "RelativeToolTip": "Views\\JobListing\\Details.cshtml",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABwAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-23T19:10:00.482Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Profile.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\User\\Profile.cshtml",
+              "RelativeDocumentMoniker": "Views\\User\\Profile.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\User\\Profile.cshtml",
+              "RelativeToolTip": "Views\\User\\Profile.cshtml",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-23T18:38:55.182Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "All.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\JobListing\\All.cshtml",
+              "RelativeDocumentMoniker": "Views\\JobListing\\All.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Views\\JobListing\\All.cshtml",
+              "RelativeToolTip": "Views\\JobListing\\All.cshtml",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAB4AAABlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-23T18:01:20.577Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TipController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Controllers\\TipController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TipController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Controllers\\TipController.cs",
+              "RelativeToolTip": "Controllers\\TipController.cs",
+              "ViewState": "AQIAAFMAAAAAAAAAAAAAwFQAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-23T15:37:25.447Z",
+              "WhenOpened": "2024-04-23T17:48:47.345Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ToolServices.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Core\\Services\\ToolServices.cs",
+              "RelativeDocumentMoniker": "..\\OnlyTools.Core\\Services\\ToolServices.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Core\\Services\\ToolServices.cs",
+              "RelativeToolTip": "..\\OnlyTools.Core\\Services\\ToolServices.cs",
+              "ViewState": "AQIAADcAAAAAAAAAAAAgwEUAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T17:14:08.774Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "JobListingController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Controllers\\JobListingController.cs",
+              "RelativeDocumentMoniker": "Controllers\\JobListingController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools\\Controllers\\JobListingController.cs",
+              "RelativeToolTip": "Controllers\\JobListingController.cs",
+              "ViewState": "AQIAAFkAAAAAAAAAAAAowGsAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T17:12:41.038Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "JobListingServices.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Core\\Services\\JobListingServices.cs",
+              "RelativeDocumentMoniker": "..\\OnlyTools.Core\\Services\\JobListingServices.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\FinalProj\\OnlyTools.Core\\Services\\JobListingServices.cs",
+              "RelativeToolTip": "..\\OnlyTools.Core\\Services\\JobListingServices.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAApwAoAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T16:51:06.12Z",
               "EditorCaption": ""
             }
           ]

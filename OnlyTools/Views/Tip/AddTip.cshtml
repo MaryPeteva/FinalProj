@@ -1,4 +1,4 @@
-﻿@model TipPostModel
+﻿@model TipUploadModel
 
 @{
     ViewBag.Title = "Share a Tips and tricks";
@@ -16,7 +16,7 @@
             </div>
             <div class="mb-3">
                 <label asp-for="Content"></label>
-                <input asp-for="Content" class="form-control" placeholder="Enter Content">
+                <textarea asp-for="Content" class="form-control" rows="8">@Model.Content</textarea>
                 <span asp-validation-for="Content" class="small text-danger"></span>
             </div>
         </div>

@@ -8,7 +8,7 @@ using OnlyTools.Core.Models.Category;
 
 namespace OnlyTools.Core.Models.Tips
 {
-    public class TipPostModel
+    public class TipUploadModel
     {
         [Key]
         public int Id { get; set; }

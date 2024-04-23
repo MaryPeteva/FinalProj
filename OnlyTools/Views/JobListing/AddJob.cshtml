@@ -1,0 +1,58 @@
+﻿@model JobListingUploadModel
+
+@{
+    ViewBag.Title = "Post a job";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+<div class="row">
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <div class="mb-3">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control" placeholder="Enter job title">
+                <span asp-validation-for="Title" class="small text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control" rows="8">@Model.Description</textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" placeholder="@Model.Price">
+                <span asp-validation-for="Price" class="small text-danger"></span>
+            </div>
+        </div>
+        <div class="mb-3">
+             <div class="mb-3">
+                <label asp-for="@Model.CategoryId" class="form-label-add-edit">Select Category</label>
+                <select asp-for="@Model.CategoryId" class="form-control" aria-required="true">
+                    <option disabled selected value="">Select Category...</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
+            </div> 
+            <div class="form-group">
+                <label for="listingType">Listing Type:</label>
+                <select id="listingType" name="IsServiceOffered" class="form-control">
+                    <option value="true">Offering Service</option>
+                    <option value="false">Looking for Handyman</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Add Listing</button>
+            </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

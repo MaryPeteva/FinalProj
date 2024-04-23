@@ -7,9 +7,9 @@ namespace OnlyTools.Controllers
 {
     public class LikeController : BaseController
     {
-        private readonly ILikeService _likeService;
+        private readonly ILikeServices _likeService;
 
-        public LikeController(ILikeService likeService)
+        public LikeController(ILikeServices likeService)
         {
             _likeService = likeService;
         }

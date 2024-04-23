@@ -1,0 +1,51 @@
+﻿@model List<JobListingAllModel>
+@inject IPaginationServices PaginationService
+@{
+    ViewBag.Title = "My Jobs";
+}
+
+<style>
+    .card-img-top {
+        width: 200px;
+        height: auto;
+    }
+</style>
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+@if (Model.Count == 0)
+{
+    <h2>You have not shared any jobs</h2>
+}
+else
+{
+    <div class="text-center row">
+        @foreach (var job in Model)
+        {
+            <div class="card col-4" style="width: 20rem; ">
+                <div class="card-body">
+                    <h5 class="card-title mt-1">@job.Title</h5>
+                    <p class="mb-0"><span class="fw-bold">Name: </span>@job.Title</p>
+                    <p class="mb-0"><span class="fw-bold">Job category: </span>@job.Category.Name</p>
+                    <p class="mb-0"><span class="fw-bold">Posted: </span>@job.Posted</p>
+                </div>
+
+                <a asp-controller="JobListing" asp-action="Details" asp-route-id="@job.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">View Details</a>
+                <a asp-controller="JobListing" asp-action="Edit" asp-route-id="@job.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+                <form class="mt-2" asp-controller="JobListing" asp-action="Delete" asp-route-id="@job.Id">
+                    <div class="d-grid gap-2">
+                        <input type="submit" value="Delete" class="btn btn-danger mb-2" />
+                    </div>
+                </form>
+            </div>
+        }
+        @{
+            var paginationModel = PaginationService.CreatePaginationModel(ViewBag.PageIndex, ViewBag.TotalPages, ViewBag.HasPreviousPage, ViewBag.HasNextPage, "All", "Tool", new { });
+        }
+
+        @await Html.PartialAsync("_Pagination", (object)paginationModel)
+    </div>
+}
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

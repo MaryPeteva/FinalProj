@@ -1,13 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using OnlyTools.Controllers;
 using OnlyTools.Core.Contracts;
 using OnlyTools.Core.Models.Tool;
-using OnlyTools.Infrastructure.Data.Models;
-using OnlyTools.Models;
-using System.Drawing.Printing;
 
 namespace OnlyTools.Web.Controllers
 {
@@ -48,7 +43,7 @@ namespace OnlyTools.Web.Controllers
         {
             Guid userId = GetUserId();
             tool.OwnerID = userId;
-            await _services.AddNewToolAsync(tool);
+            await _services.AddNewToolAsync(tool, userId);
             return RedirectToAction("Details", "Tool", new { id = tool.Id });
         }
 

@@ -1,0 +1,48 @@
+﻿@model List<JobListingAllModel>
+@inject IPaginationServices PaginationService
+@{
+    ViewBag.Title = "What do you need for your next project?";
+}
+
+<style>
+    .card-img-top {
+        width: 200px;
+        height: auto;
+    }
+</style>
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @if (!Model.Any())
+    {
+        <h2>No Jobs posted yet!</h2>
+        <h4>Be the first to share!</h4>
+    }
+    else
+    {
+        @foreach (var job in Model)
+        {
+            <div class="card col-4" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title mt-1">@job.Title</h5>
+                    <p class="mb-0"><span class="fw-bold">Poster: </span>@job.Poster.UserName</p>
+                    <p class="mb-0"><span class="fw-bold">Job category: </span>@job.Category.Name</p>
+                    <p class="mb-0"><span class="fw-bold">Posted: </span>@job.Posted</p>
+                    <br />
+                </div>
+                <a asp-controller="JobListing" asp-action="Details" asp-route-id="@job.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">View Details</a>
+            </div>
+        }
+    }
+
+    @{
+        var paginationModel = PaginationService.CreatePaginationModel(ViewBag.PageIndex, ViewBag.TotalPages, ViewBag.HasPreviousPage, ViewBag.HasNextPage, "All", "JobListing", new { });
+    }
+
+    @await Html.PartialAsync("_Pagination", (object)paginationModel)
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }

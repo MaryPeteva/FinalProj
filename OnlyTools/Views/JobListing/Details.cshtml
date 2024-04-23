@@ -1,0 +1,31 @@
+﻿@model JobListingDetailModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.Title</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-3">Job Category:</dt>
+            <dd class="col-sm-9">@Model.Category.Name</dd>
+            <dt class="col-sm-3">Description:</dt>
+            <dd class="col-sm-9">@Model.Description</dd>
+
+            <dt class="col-sm-3">Rent Price:</dt>
+            <dd class="col-sm-9">@Model.Price</dd>
+        </dl>
+        @if (User.Identity.IsAuthenticated && Model.PosterId.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier))
+        {
+            <a asp-controller="JobListing" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+            <form class="mt-2" asp-controller="JobListing" asp-action="Delete" asp-route-id="@Model.Id">
+                <div class="d-grid gap-2">
+                    <input type="hidden" name="tipId" value="@Model.Id" />
+                    <input type="submit" value="Delete" class="btn btn-danger mb-2" />
+                </div>
+            </form>
+        }
+    </div>
+</div>

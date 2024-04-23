@@ -18,9 +18,9 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<ITipServices, TipServices>();
             services.AddScoped<ICategoriesServices, CategoriesServices>();
             services.AddScoped<IUserServices, UserServices>();
-            services.AddScoped<IPaginationService, PaginationService>();
-            services.AddScoped<ILikeService, LikeService>();
-
+            services.AddScoped<IPaginationServices, PaginationService>();
+            services.AddScoped<ILikeServices, LikeService>();
+            services.AddScoped <IJobListingServices, JobListingServices>();
 
 
             return services;

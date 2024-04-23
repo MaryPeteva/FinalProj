@@ -235,10 +235,18 @@ namespace OnlyTools.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int")
+                        .HasComment("Category unique identifier, integer representation");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
+
+                    b.Property<bool>("IsServiceOffered")
+                        .HasColumnType("bit")
+                        .HasComment("Indicates if the listing is for offering a service or looking for handyman");
 
                     b.Property<DateTime>("Posted")
                         .HasColumnType("datetime2");
@@ -256,9 +264,58 @@ namespace OnlyTools.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.HasIndex("PosterId");
 
                     b.ToTable("JobListings");
+                });
+
+            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.JobListingCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasComment("unique integer category identifier");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("Category name, string representation");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("JobListingCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Electrical"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Plumbing"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "HVAC Systems:"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Interior Renovations"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Other"
+                        });
                 });
 
             modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.Like", b =>
@@ -550,11 +607,19 @@ namespace OnlyTools.Infrastructure.Migrations
 
             modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.JobListing", b =>
                 {
+                    b.HasOne("OnlyTools.Infrastructure.Data.Models.JobListingCategory", "Category")
+                        .WithMany("Jobs")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", "Poster")
                         .WithMany()
                         .HasForeignKey("PosterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
 
                     b.Navigation("Poster");
                 });
@@ -625,6 +690,11 @@ namespace OnlyTools.Infrastructure.Migrations
             modelBuilder.Entity("OnlyTools.Infrastructure.Data.IdentityModels.ApplicationUser", b =>
                 {
                     b.Navigation("LikedTips");
+                });
+
+            modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.JobListingCategory", b =>
+                {
+                    b.Navigation("Jobs");
                 });
 
             modelBuilder.Entity("OnlyTools.Infrastructure.Data.Models.Tip", b =>

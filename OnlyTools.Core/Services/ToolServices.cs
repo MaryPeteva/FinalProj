@@ -15,15 +15,17 @@ namespace OnlyTools.Core.Services
             context = _context;
         }
 
-        public async Task AddNewToolAsync(ToolUploadModel tool)
+        public async Task AddNewToolAsync(ToolUploadModel tool, Guid userId)
         {
             ToolCategory cat = await context.ToolCategories.FindAsync(tool.CategoryId);
+            var user = await context.Users.FindAsync(userId);
             var newTool = new Tool()
             {
                 Name = tool.Name,
                 Description = tool.Description,
                 RentPrice = tool.RentPrice,
-                OwnerID = tool.OwnerID,
+                OwnerID = userId,
+                Owner = user,
                 CategoryId = tool.CategoryId,
                 Category = cat
             };

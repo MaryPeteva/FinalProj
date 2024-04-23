@@ -20,15 +20,16 @@ namespace OnlyTools.Core.Services
             context = _context;
         }
 
-        public async Task AddNewTipAsync(TipPostModel tip)
+        public async Task AddNewTipAsync(TipUploadModel tip, Guid userId)
         {
             TipCategory cat = await context.TipCategories.FindAsync(tip.CategoryId);
+            var user = await context.Users.FindAsync(userId);
             var newTip = new Tip()
             {
                 Title = tip.Title,
                 Content = tip.Content,
-                AuthorId = tip.AuthorId,
-                Author = tip.Author,
+                AuthorId = userId,
+                Author = user,
                 PubllishedOn = DateTime.Now,
                 CategoryId = tip.CategoryId,
                 Category = cat
@@ -145,7 +146,7 @@ namespace OnlyTools.Core.Services
 
         }
 
-        public async Task UpdateTipAsync(int id, TipPostModel tip)
+        public async Task UpdateTipAsync(int id, TipUploadModel tip)
         {
             Tip t = await context.TipsAndTricks.FindAsync(id);
             TipCategory cat = await context.TipCategories.FindAsync(tip.CategoryId);

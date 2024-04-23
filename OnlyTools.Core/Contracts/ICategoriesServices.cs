@@ -6,5 +6,6 @@ namespace OnlyTools.Core.Contracts
     {
         Task<IEnumerable<CategoryModel>> GetToolCategoriesAsync();
         Task<IEnumerable<CategoryModel>> GetTipCategoriesAsync();
+        Task<IEnumerable<CategoryModel>> GetJobsCategoriesAsync();
     }
 }

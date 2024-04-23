@@ -37,5 +37,17 @@ namespace OnlyTools.Core.Services
                 })
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<CategoryModel>> GetJobsCategoriesAsync()
+        {
+            return await context.JobListingCategories
+               .AsNoTracking()
+               .Select(t => new CategoryModel()
+               {
+                   Id = t.Id,
+                   Name = t.Name
+               })
+               .ToListAsync();
+        }
     }
 }

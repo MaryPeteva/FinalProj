@@ -5,7 +5,7 @@ using OnlyTools.Infrastructure.Data.Models;
 
 namespace OnlyTools.Core.Services
 {
-    public class LikeService : ILikeService
+    public class LikeService : ILikeServices
     {
         private readonly OnlyToolsDbContext context;
 

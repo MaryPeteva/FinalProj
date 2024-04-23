@@ -1,8 +1,4 @@
 ﻿using OnlyTools.Core.Models.Category;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using static OnlyTools.Infrastructure.Data.Utils.Errors.ErrorMessages;
-using static OnlyTools.Infrastructure.Data.Utils.ValidationsConstants.ToolValidationConstants;
 namespace OnlyTools.Core.Models.Tool
 {
     public class ToolModel

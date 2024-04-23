@@ -5,7 +5,7 @@ using OnlyTools.Models;
 
 namespace OnlyTools.Core.Services
 {
-    public class PaginationService:IPaginationService
+    public class PaginationService:IPaginationServices
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUrlHelperFactory _urlHelperFactory;

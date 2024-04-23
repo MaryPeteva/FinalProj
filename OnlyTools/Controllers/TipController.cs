@@ -29,17 +29,17 @@ namespace OnlyTools.Controllers
         [HttpGet]
         public async Task<IActionResult> AddTip()
         {
-            var tip = new TipPostModel();
+            var tip = new TipUploadModel();
             tip.Categories = await _categoryServices.GetTipCategoriesAsync();
             return View(tip);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddTip(TipPostModel tip)
+        public async Task<IActionResult> AddTip(TipUploadModel tip)
         {
             Guid userId = GetUserId();
             tip.AuthorId = userId;
-            await _services.AddNewTipAsync(tip);
+            await _services.AddNewTipAsync(tip, userId);
             return RedirectToAction("Details", "Tip", new { id = tip.Id });
         }
 
@@ -68,7 +68,7 @@ namespace OnlyTools.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, TipPostModel tip)
+        public async Task<IActionResult> Edit(int id, TipUploadModel tip)
         {
             await _services.UpdateTipAsync(id, tip);
             return RedirectToAction("Details", "Tip", new { id = tip.Id });
